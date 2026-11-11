@@ -1,0 +1,23 @@
+.format-filter {
+  display: flex;
+}
+
+.format-filter__btn {
+  height: 2.25rem;
+  padding: 0 0.9rem;
+  border-width: 2px;
+  font-size: var(--text-2xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  & + & {
+    margin-left: -2px;
+  }
+
+  &[aria-pressed='true'] {
+    background: var(--color-pressed);
+    border-color: var(--color-pressed);
+    color: var(--color-on-accent);
+    position: relative;
+  }
+}

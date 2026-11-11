@@ -1,0 +1,75 @@
+<section class="confirmation">
+    <div class="confirmation__inner">
+        @switch (state().status) { @case ("loading") {
+        <p class="confirmation__message" role="status">{{ "orderConfirmation.loading" | translate }}</p>
+        } @case ("error") {
+        <div class="confirmation__message-block">
+            <p class="confirmation__message" role="alert">{{ "orderConfirmation.error" | translate }}</p>
+            <button type="button" class="btn btn-secondary" (click)="load()">{{ "orderConfirmation.retry" | translate }}</button>
+        </div>
+        } @case ("notFound") {
+        <h1 class="confirmation__title">{{ "orderConfirmation.notFoundTitle" | translate }}</h1>
+        <div class="confirmation__message-block">
+            <p class="confirmation__message">{{ "orderConfirmation.notFound" | translate }}</p>
+            <a routerLink="/" class="btn btn-primary">{{ "orderConfirmation.backToShop" | translate }}</a>
+        </div>
+        } @case ("loaded") { @if (order(); as order) {
+        <h1 class="confirmation__title">{{ "orderConfirmation.title" | translate }}</h1>
+        <p class="confirmation__meta">
+            <span class="tag tag-accent">{{ "orderConfirmation.statuses." + order.status | translate }}</span>
+            <span>{{ "orderConfirmation.placedOn" | translate : { date: (order.datePlaced | date : "medium" : undefined : translate.currentLang) } }}</span>
+            <span>{{ "orderConfirmation.number" | translate : { id: order.id } }}</span>
+        </p>
+        <div class="confirmation__layout">
+            <div class="confirmation__panel">
+                <h2 class="confirmation__heading">{{ "orderConfirmation.linesTitle" | translate }}</h2>
+                <ul class="confirmation__lines">
+                    @for (line of order.lines; track line.recordId) {
+                    <li class="order-line">
+                        <img
+                            class="order-line__cover"
+                            [src]="coverSrc(line)"
+                            [alt]="'racks.coverAlt' | translate : { title: line.title }"
+                        />
+                        <div class="order-line__info">
+                            <span class="order-line__artist">{{ line.artist }}</span>
+                            <span class="order-line__title">{{ line.title }}</span>
+                            <span class="order-line__detail">
+                                {{ line.format }} &middot;
+                                {{
+                                    "orderConfirmation.lineQuantity"
+                                        | translate
+                                            : {
+                                                  count: line.quantity,
+                                                  price: (line.price / 100 | currency : "USD" : "symbol" : "1.0-2")
+                                              }
+                                }}
+                            </span>
+                        </div>
+                        <span class="order-line__subtotal">{{
+                            (line.price * line.quantity) / 100 | currency : "USD" : "symbol" : "1.0-2"
+                        }}</span>
+                    </li>
+                    }
+                </ul>
+                <div class="hr"></div>
+                <p class="confirmation__total">
+                    <span class="heading-label">{{ "orderConfirmation.total" | translate }}</span>
+                    <strong>{{ order.total / 100 | currency : "USD" : "symbol" : "1.0-2" }}</strong>
+                </p>
+            </div>
+            <div class="confirmation__panel">
+                <h2 class="confirmation__heading">{{ "orderConfirmation.addressTitle" | translate }}</h2>
+                <address class="confirmation__address">
+                    {{ order.shippingAddress.name }}<br />
+                    {{ order.shippingAddress.street }}<br />
+                    {{ order.shippingAddress.postalCode }} {{ order.shippingAddress.city }}<br />
+                    {{ order.shippingAddress.province }}, {{ order.shippingAddress.community }}<br />
+                    {{ order.shippingAddress.country }}
+                </address>
+                <a routerLink="/" class="btn btn-primary">{{ "orderConfirmation.keepShopping" | translate }}</a>
+            </div>
+        </div>
+        } } }
+    </div>
+</section>

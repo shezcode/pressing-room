@@ -1,0 +1,84 @@
+<section class="detail">
+    <div class="detail__inner">
+        @switch (state().status) {
+        @case ("loading") {
+        <p class="detail__message" role="status">{{ "recordDetail.loading" | translate }}</p>
+        }
+        @case ("error") {
+        <div class="detail__message-block">
+            <p class="detail__message" role="alert">{{ "recordDetail.error" | translate }}</p>
+            <button type="button" class="btn btn-secondary" (click)="load()">{{ "recordDetail.retry" | translate }}</button>
+        </div>
+        }
+        @case ("notFound") {
+        <div class="detail__message-block">
+            <h1 class="detail__not-found-title">{{ "recordDetail.notFoundTitle" | translate }}</h1>
+            <p class="detail__message">{{ "recordDetail.notFound" | translate }}</p>
+            <a routerLink="/" class="btn btn-primary">{{ "recordDetail.backToShop" | translate }}</a>
+        </div>
+        }
+        @case ("loaded") {
+        @if (record(); as record) {
+        <article class="detail__grid">
+            <div class="detail__art">
+                <img
+                    class="detail__cover"
+                    [src]="coverSrc(record)"
+                    [alt]="'racks.coverAlt' | translate: { title: record.title }"
+                />
+            </div>
+            <div class="detail__body">
+                <span class="detail__artist">{{ record.artist }}</span>
+                <h1 class="detail__title">{{ record.title }}</h1>
+                <div class="hr"></div>
+                <dl class="detail__facts">
+                    <div class="detail__fact">
+                        <dt class="heading-label">{{ "recordDetail.format" | translate }}</dt>
+                        <dd>{{ formatLabel(record) }} - {{ record.year }}</dd>
+                    </div>
+                    <div class="detail__fact">
+                        <dt class="heading-label">{{ "recordDetail.genre" | translate }}</dt>
+                        <dd>
+                            <span class="tag tag-outline">{{ record.genre }}</span>
+                        </dd>
+                    </div>
+                    <div class="detail__fact">
+                        <dt class="heading-label">{{ "recordDetail.availability" | translate }}</dt>
+                        <dd>
+                            @if (record.stock === 0) {
+                            <span class="tag tag-accent detail__stock">{{ "racks.outOfStock" | translate }}</span>
+                            } @else {
+                            {{ "recordDetail.inStock" | translate }}
+                            }
+                        </dd>
+                    </div>
+                </dl>
+                <p class="detail__price">{{ record.price / 100 | currency: "USD" : "symbol" : "1.0-2" }}</p>
+                <p class="detail__description">{{ record.description }}</p>
+                <button
+                    type="button"
+                    class="btn btn-primary detail__add"
+                    [disabled]="!canAdd(record)"
+                    (click)="addToCart(record)"
+                >
+                    @if (record.stock === 0) {
+                    {{ "racks.outOfStock" | translate }}
+                    } @else if (!canAdd(record)) {
+                    {{ "recordDetail.allInCart" | translate }}
+                    } @else {
+                    {{ "recordDetail.addToCart" | translate }}
+                    }
+                </button>
+                @if (inCart(record) > 0) {
+                <p class="detail__in-cart" role="status">
+                    {{ "recordDetail.inCart" | translate: { count: inCart(record) } }}
+                    <a routerLink="/cart">{{ "recordDetail.viewCart" | translate }}</a>
+                </p>
+                }
+            </div>
+        </article>
+        }
+        }
+        }
+    </div>
+</section>

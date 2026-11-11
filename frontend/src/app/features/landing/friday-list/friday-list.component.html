@@ -1,0 +1,49 @@
+<section class="newsletter" aria-labelledby="friday-list-title">
+    <div class="newsletter__inner">
+        <div>
+            <h2 class="newsletter__title" id="friday-list-title">{{ "friday.title" | translate }}</h2>
+            <p class="newsletter__copy">
+                <strong>{{ "friday.copyStrong" | translate }}</strong> {{ "friday.copy" | translate }}
+                <mark>{{ "friday.copyMark" | translate }}</mark>
+            </p>
+        </div>
+        <div>
+            <form class="newsletter__form" novalidate (submit)="submit($event)">
+                <label class="hidden" for="newsletter-email">{{ "friday.emailLabel" | translate }}</label>
+                <input
+                    type="email"
+                    id="newsletter-email"
+                    class="input newsletter__input"
+                    autocomplete="email"
+                    [formControl]="email"
+                    [placeholder]="'friday.emailLabel' | translate"
+                    [attr.aria-invalid]="email.touched && email.invalid"
+                    aria-describedby="friday-list-message"
+                    (input)="clearResult()"
+                />
+                <button class="btn btn-primary newsletter__submit" type="submit" [disabled]="state() === 'submitting'">
+                    {{ "friday.subscribe" | translate }}
+                </button>
+            </form>
+            <p class="newsletter__message" id="friday-list-message" role="status">
+                @if (email.touched && email.invalid) {
+                <span class="newsletter__error">{{
+                    (email.hasError("required") ? "friday.emailRequired" : "friday.emailInvalid") | translate
+                }}</span>
+                } @else {
+                @switch (state()) {
+                @case ("subscribed") {
+                <span>{{ "friday.subscribed" | translate }}</span>
+                }
+                @case ("duplicate") {
+                <span>{{ "friday.duplicate" | translate }}</span>
+                }
+                @case ("failed") {
+                <span class="newsletter__error">{{ "friday.error" | translate }}</span>
+                }
+                }
+                }
+            </p>
+        </div>
+    </div>
+</section>

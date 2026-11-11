@@ -1,0 +1,78 @@
+// The Friday List signup, ported from the original design
+:host {
+  display: block;
+}
+
+.newsletter {
+  border-bottom: 2px solid var(--color-divider);
+}
+
+.newsletter__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.75rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.25rem;
+  align-items: center;
+}
+
+.newsletter__title {
+  font-size: var(--text-section-title);
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.02em;
+  padding-left: 1rem;
+  border-left: 2px solid var(--color-accent);
+}
+
+.newsletter__copy {
+  margin: 0;
+  max-width: 46ch;
+  font-size: var(--text-md);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.newsletter__copy strong {
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.newsletter__form {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.newsletter__input {
+  flex: 1 1 200px;
+  min-height: 44px;
+}
+
+.newsletter__submit {
+  min-height: 44px;
+  padding-inline: 1.5rem;
+  font-size: var(--text-sm);
+}
+
+// Reserves a line so the section does not jump when a message appears
+.newsletter__message {
+  margin: var(--space-2) 0 0;
+  min-height: 1.5em;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.newsletter__error {
+  color: var(--color-accent-text);
+}
+
+.newsletter__input.ng-invalid.ng-touched {
+  border-color: var(--color-accent);
+}
+
+@media (max-width: 768px) {
+  .newsletter__inner {
+    padding: 2rem 1.25rem;
+  }
+}

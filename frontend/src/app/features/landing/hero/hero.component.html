@@ -1,0 +1,39 @@
+<section class="hero">
+    <div class="hero__split">
+        <div class="hero__panel-text">
+            <p class="hero__arrivals">{{ "hero.arrivals" | translate }}</p>
+            <h1 class="hero__title">
+                {{ "hero.titleLine1" | translate }}<span class="hero__punct">,</span><br />
+                <span class="hero__band">{{ "hero.titleLine2" | translate }}</span>
+            </h1>
+            <div class="hero__stat">
+                <span class="hero__stat-number">{{ "hero.statNumber" | translate }}</span>
+                <p class="hero__copy">
+                    <strong>{{ "hero.statStrong" | translate }}</strong
+                    ><br />{{ "hero.statCopy" | translate }}
+                </p>
+            </div>
+            <div class="hero__actions">
+                <a class="btn btn-primary" routerLink="/" fragment="racks">{{
+                    "hero.shopNow" | translate
+                }}</a>
+                <a class="btn btn-secondary" routerLink="/" fragment="featured">{{
+                    "hero.picks" | translate
+                }}</a>
+            </div>
+        </div>
+        <div class="hero__panel-art">
+            @if (latest(); as record) {
+            <div class="hero__frame">
+                <img
+                    class="hero__frame-cover"
+                    [src]="coverSrc(record)"
+                    [alt]="'hero.coverAlt' | translate : { title: record.title }"
+                    loading="eager"
+                    fetchpriority="high"
+                />
+            </div>
+            }
+        </div>
+    </div>
+</section>

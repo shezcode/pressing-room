@@ -1,0 +1,227 @@
+<header class="site-header">
+    <div class="site-header__inner" (keydown.escape)="closeMenu(menuToggle)">
+        <a routerLink="/" class="brand">
+            <img src="assets/logo.svg" [alt]="'header.logoAlt' | translate" class="brand__icon" width="26" height="26" />
+            <span class="brand__name">Pressing Room</span>
+        </a>
+        <form
+            id="site-search"
+            class="site-search"
+            role="search"
+            [class.is-open]="searchOpen()"
+            (submit)="submitSearch($event, searchInput.value)"
+        >
+            <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                aria-hidden="true"
+            >
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="m20 20-3.6-3.6"></path>
+            </svg>
+            <input
+                #searchInput
+                type="search"
+                name="search"
+                class="input"
+                [attr.aria-label]="'header.search' | translate"
+                [placeholder]="'header.searchPlaceholder' | translate"
+            />
+        </form>
+        <button
+            type="button"
+            class="btn btn-secondary icon-btn search-toggle"
+            aria-controls="site-search"
+            [attr.aria-expanded]="searchOpen()"
+            [attr.aria-label]="'header.search' | translate"
+            (click)="toggleSearch()"
+        >
+            <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                aria-hidden="true"
+            >
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="m20 20-3.6-3.6"></path>
+            </svg>
+        </button>
+        <button
+            type="button"
+            #menuToggle
+            class="btn btn-secondary icon-btn menu-toggle"
+            aria-controls="site-menu"
+            [attr.aria-expanded]="menuOpen()"
+            [attr.aria-label]="'header.menu' | translate"
+            [title]="'header.menu' | translate"
+            (click)="menuOpen.set(!menuOpen())"
+        >
+            <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                aria-hidden="true"
+            >
+                @if (menuOpen()) {
+                <path d="M6 6l12 12M18 6 6 18"></path>
+                } @else {
+                <path d="M4 6h16M4 12h16M4 18h16"></path>
+                }
+            </svg>
+        </button>
+        <div id="site-menu" class="site-menu" [class.is-open]="menuOpen()">
+            <nav class="site-nav" (click)="menuOpen.set(false)" [attr.aria-label]="'header.mainNav' | translate">
+                <a routerLink="/">{{ "nav.home" | translate }}</a>
+                <a routerLink="/" fragment="about">{{ "nav.about" | translate }}</a>
+                <a routerLink="/records">{{ "nav.shop" | translate }}</a>
+                @if (isCustomer()) {
+                <a routerLink="/collection">{{ "nav.collection" | translate }}</a>
+                }
+            </nav>
+            <div class="lang-toggle" role="group" [attr.aria-label]="'header.language' | translate">
+                @for (lang of languages; track lang) {
+                <button
+                    type="button"
+                    class="btn btn-secondary lang-toggle__btn"
+                    [attr.lang]="lang"
+                    [attr.aria-pressed]="translate.currentLang === lang"
+                    [attr.aria-label]="'header.languages.' + lang | translate"
+                    [title]="'header.languages.' + lang | translate"
+                    (click)="setLanguage(lang)"
+                >
+                    {{ lang.toUpperCase() }}
+                </button>
+                }
+            </div>
+            <button
+                type="button"
+                role="switch"
+                class="btn btn-secondary icon-btn"
+                [attr.aria-checked]="isDark()"
+                [attr.aria-label]="'header.darkTheme' | translate"
+                [title]="'header.darkTheme' | translate"
+                (click)="toggleTheme()"
+            >
+                @if (isDark()) {
+                <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    aria-hidden="true"
+                >
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path
+                        d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+                    ></path>
+                </svg>
+                } @else {
+                <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+                </svg>
+                }
+            </button>
+            @if (user(); as user) {
+            <div class="account">
+                <span class="account__name">{{ user.name }}</span>
+                <button
+                    type="button"
+                    class="btn btn-secondary icon-btn"
+                    [attr.aria-label]="'header.signOut' | translate"
+                    [title]="'header.signOut' | translate"
+                    (click)="signOut()"
+                >
+                    <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path>
+                    </svg>
+                </button>
+            </div>
+            } @else {
+            <a
+                routerLink="/login"
+                class="btn btn-secondary icon-btn"
+                [attr.aria-label]="'header.signIn' | translate"
+                [title]="'header.signIn' | translate"
+            >
+                <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <circle cx="12" cy="8" r="4"></circle>
+                    <path d="M4 21a8 8 0 0 1 16 0"></path>
+                </svg>
+            </a>
+            }
+        </div>
+        @if (isAdmin()) {
+        <a routerLink="/admin/records" class="btn btn-primary admin-btn">{{ "header.admin" | translate }}</a>
+        } @else {
+        <a
+            routerLink="/cart"
+            class="btn btn-primary cart-btn"
+            [attr.aria-label]="'header.cartLabel' | translate : { count: cartCount() }"
+            [title]="'header.cartLabel' | translate : { count: cartCount() }"
+        >
+            <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+            >
+                <circle cx="9" cy="20" r="1.4"></circle>
+                <circle cx="18" cy="20" r="1.4"></circle>
+                <path d="M2 3h2.2l2.6 12h11.4l2.2-8H6"></path>
+            </svg>
+            <span class="cart-badge" aria-hidden="true">{{ cartCount() }}</span>
+        </a>
+        }
+    </div>
+</header>

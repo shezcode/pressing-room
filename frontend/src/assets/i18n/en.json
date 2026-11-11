@@ -1,0 +1,350 @@
+{
+    "about": {
+        "title": "About the shop",
+        "copy": {
+            "start": "Pressing Room started as",
+            "crates": "two crates",
+            "shop": "behind a coffee counter on Harrison Street. We now grade, clean and ship about",
+            "volume": "four hundred records a week",
+            "link": ", and",
+            "promise": "we still play every one before it goes out."
+        },
+        "story": "Read our story",
+        "stats": {
+            "shelves": {
+                "value": "14,000",
+                "label": "records on the shelves"
+            },
+            "opened": {
+                "value": "2009",
+                "label": "opened on Harrison St"
+            },
+            "delivery": {
+                "value": "1 day",
+                "label": "order to doorstep"
+            }
+        }
+    },
+    "admin": {
+        "title": "Manage Records",
+        "list": {
+            "title": "All Records",
+            "caption": "Every Record in the shop, including Out of stock ones",
+            "loading": "Loading Records...",
+            "error": "We couldn't load the Records.",
+            "retry": "Try again",
+            "empty": "There are no Records yet. Add the first one.",
+            "loadMore": "Load more",
+            "cover": "Cover",
+            "artist": "Artist",
+            "titleColumn": "Title",
+            "format": "Format",
+            "price": "Price",
+            "stock": "Stock",
+            "featured": "Featured",
+            "featuredYes": "Featured",
+            "featuredNo": "No",
+            "actions": "Actions",
+            "edit": "Edit",
+            "delete": "Delete",
+            "editLabel": "Edit {{title}}",
+            "deleteLabel": "Delete {{title}}"
+        },
+        "form": {
+            "heading": "Add a Record",
+            "created": "Added \"{{title}}\" by {{artist}}. It is now in the shop.",
+            "artist": "Artist",
+            "title": "Title",
+            "format": "Format",
+            "variant": "Variant (optional)",
+            "variantPlaceholder": "LP, 2xLP...",
+            "year": "Release year",
+            "genre": "Genre",
+            "price": "Price (USD)",
+            "pricePlaceholder": "24.99",
+            "stock": "Stock",
+            "featured": "Featured Record",
+            "description": "Description",
+            "cover": "Cover image",
+            "coverHint": "JPEG, PNG or WebP, up to 5 MB.",
+            "submit": "Add Record",
+            "submitting": "Adding...",
+            "error": "We couldn't add the Record. Please try again.",
+            "errors": {
+                "required": "This field is required.",
+                "tooLong": "Use {{max}} characters or fewer.",
+                "year": "Enter a year between {{min}} and {{max}}.",
+                "price": "Enter a price in dollars, like 24.99.",
+                "stock": "Enter a whole number, zero or more.",
+                "coverRequired": "Choose a cover image.",
+                "coverType": "The cover must be a JPEG, PNG or WebP image.",
+                "coverSize": "The cover must be 5 MB or smaller.",
+                "rejected": "The server rejected this: {{message}}"
+            },
+            "editHeading": "Edit a Record",
+            "updated": "Saved \"{{title}}\" by {{artist}}. The shop now shows the changes.",
+            "coverHintEdit": "Leave empty to keep the current cover. JPEG, PNG or WebP, up to 5 MB.",
+            "coverDemoDisabled": "Cover upload is disabled in the demo. Pick one of the shop's covers instead.",
+            "coverOption": "Cover {{number}}",
+            "save": "Save changes",
+            "saving": "Saving...",
+            "cancel": "Cancel",
+            "saveError": "We couldn't save the changes. Please try again."
+        },
+        "delete": {
+            "title": "Delete this Record?",
+            "message": "\"{{title}}\" by {{artist}} will be removed from the shop. Orders already placed keep their lines.",
+            "confirm": "Delete",
+            "keep": "Keep it",
+            "deleted": "Deleted \"{{title}}\" by {{artist}}. It is no longer in the shop.",
+            "error": "We couldn't delete \"{{title}}\". Please try again."
+        }
+    },
+    "cart": {
+        "title": "Your Cart",
+        "loading": "Loading your cart...",
+        "error": "We couldn't load your cart.",
+        "retry": "Try again",
+        "empty": "Your cart is empty.",
+        "backToShop": "Back to the shop",
+        "unavailable": "This record is no longer available",
+        "removeToContinue": "Remove it to continue",
+        "blocksCheckout": "Some records in your cart can't be bought. Remove them before checking out.",
+        "quantityOf": "Quantity of {{title}}",
+        "decrease": "Remove one copy of {{title}}",
+        "increase": "Add one more copy of {{title}}",
+        "remove": "Remove",
+        "removeLabel": "Remove {{title}} from your cart",
+        "total": "Total",
+        "checkout": "Checkout"
+    },
+    "checkout": {
+        "title": "Checkout",
+        "empty": "Your cart is empty, so there is nothing to check out.",
+        "backToShop": "Back to the shop",
+        "backToCart": "Back to your cart",
+        "shippingTitle": "Shipping address",
+        "fullName": "Full name",
+        "street": "Street address",
+        "city": "City",
+        "postalCode": "Postal code",
+        "country": "Country",
+        "community": "Community",
+        "province": "Province",
+        "chooseCountry": "Choose a country",
+        "chooseCommunity": "Choose a community",
+        "chooseProvince": "Choose a province",
+        "required": "This field is required.",
+        "locationsError": "We couldn't load the location lists.",
+        "retry": "Try again",
+        "paymentTitle": "Payment",
+        "paymentCopy": "Payment is simulated: no card needed. Placing the order completes it.",
+        "placeOrder": "Place order",
+        "placing": "Placing order...",
+        "rejected": "We couldn't place your order because stock changed. Nothing was charged.",
+        "thisRecord": "This record",
+        "rejectedStock": "{{title}}: you asked for {{quantity}} but only {{available}} left in stock. We've lowered your quantity.",
+        "rejectedOutOfStock": "{{title}} is now out of stock. Remove it from your cart to continue.",
+        "rejectedMissing": "{{title}} is no longer available. Remove it from your cart to continue.",
+        "error": "We couldn't place your order. Please try again.",
+        "summaryTitle": "Order summary",
+        "loading": "Loading your order summary...",
+        "summaryError": "We couldn't load your order summary.",
+        "blocksCheckout": "Some records in your cart can't be bought. Remove them before placing your order.",
+        "quantity": "Quantity: {{count}}",
+        "total": "Total"
+    },
+    "common": {
+        "accessDenied": "Access denied",
+        "close": "Close"
+    },
+    "confirmdialog": {
+        "no": "No",
+        "yes": "Yes"
+    },
+    "demo": {
+        "banner": "Portfolio demo of a fictional shop. No emails are sent and all data resets nightly, so please don't use a real password."
+    },
+    "errors": {
+        "unknown": "Unknown error"
+    },
+    "featured": {
+        "title": "Featured pressings",
+        "previous": "Previous",
+        "next": "Next",
+        "coverAlt": "{{title}} album cover",
+        "loading": "Loading featured pressings...",
+        "error": "We couldn't load the featured pressings.",
+        "retry": "Try again",
+        "empty": "No featured pressings right now."
+    },
+    "footer": {
+        "addressStreet": "1717 Harrison St, San Francisco",
+        "addressCity": "CA 94103, USA",
+        "mainMenu": "Main menu",
+        "company": "Company",
+        "theCompany": "The company",
+        "careers": "Careers",
+        "press": "Press",
+        "discover": "Discover",
+        "gradingGuide": "Grading guide",
+        "ourHistory": "Our history",
+        "tradeIns": "Trade-ins",
+        "findUsOn": "Find us on",
+        "instagram": "Instagram",
+        "discogs": "Discogs",
+        "bandcamp": "Bandcamp",
+        "legal": "Shipping / Returns / Privacy"
+    },
+    "friday": {
+        "title": "The Friday List",
+        "copyStrong": "One email per week:",
+        "copy": "what came in, what's left",
+        "copyMark": "and the three records we'd take home ourselves.",
+        "emailLabel": "Email address",
+        "subscribe": "Subscribe",
+        "emailRequired": "Enter your email address.",
+        "emailInvalid": "Enter a valid email address, like name@example.com.",
+        "subscribed": "You're on the list. See you on Friday!",
+        "duplicate": "You're already on the Friday List.",
+        "error": "We couldn't sign you up. Please try again."
+    },
+    "header": {
+        "logoAlt": "brand logo for Pressing Room",
+        "menu": "Menu",
+        "search": "Search",
+        "searchPlaceholder": "Search artists, albums...",
+        "mainNav": "Main",
+        "darkTheme": "Dark theme",
+        "language": "Language",
+        "languages": {
+            "en": "English",
+            "es": "Spanish"
+        },
+        "cartLabel": "Your cart, {{count}} items",
+        "signIn": "Sign in",
+        "admin": "Admin",
+        "signOut": "Sign out"
+    },
+    "hero": {
+        "arrivals": "New arrivals every Friday",
+        "titleLine1": "Analog sound",
+        "titleLine2": "digital ease.",
+        "statNumber": "14,000",
+        "statStrong": "records on the shelves.",
+        "statCopy": "Graded by hand, played before they ship.",
+        "shopNow": "Shop now",
+        "picks": "This week's picks",
+        "coverAlt": "{{title}} album cover"
+    },
+    "login": {
+        "email": "Email address",
+        "emailRequired": "Enter your email address.",
+        "emailInvalid": "Enter a valid email address, like name@example.com.",
+        "password": "Password",
+        "required": "This field is required.",
+        "name": "Name",
+        "country": "Country",
+        "community": "Community",
+        "province": "Province",
+        "chooseCountry": "Choose a country",
+        "chooseCommunity": "Choose a community",
+        "chooseProvince": "Choose a province",
+        "locationsError": "We couldn't load the location lists.",
+        "retry": "Try again",
+        "demo": {
+            "copy": "Exploring the Demo? Skip the form and look around with a ready-made account.",
+            "customer": "Try as Customer",
+            "admin": "Try as Admin",
+            "error": "We couldn't open the Demo account. Please try again."
+        },
+        "signIn": {
+            "title": "Sign in",
+            "copy": "Welcome back. Sign in to check out and see your Collection.",
+            "submit": "Sign in",
+            "invalidCredentials": "Wrong email or password. Please try again.",
+            "error": "We couldn't sign you in. Please try again."
+        },
+        "signUp": {
+            "title": "Create an account",
+            "copy": "New here? Sign up and you will be signed in straight away.",
+            "submit": "Sign up",
+            "emailTaken": "That email is already registered. Try signing in instead.",
+            "error": "We couldn't create your account. Please try again."
+        }
+    },
+    "nav": {
+        "home": "Home",
+        "about": "About",
+        "shop": "Shop",
+        "collection": "Collection"
+    },
+    "collection": {
+        "title": "Your Collection",
+        "loading": "Loading your collection...",
+        "error": "We couldn't load your collection.",
+        "retry": "Try again",
+        "empty": "You don't own any records yet. Your collection fills up as you place orders.",
+        "backToShop": "Browse the shop",
+        "owned": "Owned: {{count}}",
+        "leftTheShop": "No longer in the shop"
+    },
+    "orderConfirmation": {
+        "title": "Thank you for your order",
+        "loading": "Loading your order...",
+        "error": "We couldn't load this order.",
+        "retry": "Try again",
+        "notFoundTitle": "Order not found",
+        "notFound": "We couldn't find this order among yours.",
+        "backToShop": "Back to the shop",
+        "statuses": {
+            "Placed": "Placed"
+        },
+        "placedOn": "Placed on {{date}}",
+        "number": "Order {{id}}",
+        "linesTitle": "Your records",
+        "lineQuantity": "{{count}} × {{price}}",
+        "total": "Total",
+        "addressTitle": "Shipping to",
+        "keepShopping": "Keep shopping"
+    },
+    "recordDetail": {
+        "loading": "Loading record...",
+        "error": "We couldn't load this record.",
+        "retry": "Try again",
+        "notFoundTitle": "Record not found",
+        "notFound": "We couldn't find the record you're looking for. It may have left the racks.",
+        "backToShop": "Back to the shop",
+        "format": "Format",
+        "genre": "Genre",
+        "availability": "Availability",
+        "inStock": "In stock",
+        "addToCart": "Add to cart",
+        "allInCart": "All copies are in your cart",
+        "inCart": "{{count}} in your cart.",
+        "viewCart": "View cart"
+    },
+    "racks": {
+        "title": "In the racks",
+        "coverAlt": "{{title}} album cover",
+        "outOfStock": "Out of stock",
+        "loadMore": "Load more",
+        "browseCatalog": "Browse the full catalog",
+        "loading": "Loading records...",
+        "error": "We couldn't load the records.",
+        "retry": "Try again",
+        "empty": "No records in the racks yet.",
+        "noMatches": "No records match your search or filter.",
+        "filterLabel": "Filter by format",
+        "filters": {
+            "all": "All",
+            "vinyl": "Vinyl",
+            "cd": "CD",
+            "cassette": "Cassette"
+        }
+    },
+    "catalog": {
+        "title": "Catalog",
+        "results": "{{count}} Records for '{{term}}'"
+    }
+}

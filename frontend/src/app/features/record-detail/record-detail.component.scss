@@ -1,0 +1,136 @@
+// Record detail page, built from the design's tokens
+:host {
+  display: block;
+}
+
+.detail {
+  background-color: var(--color-surface-alt);
+  border-bottom: 2px solid var(--color-divider);
+}
+
+.detail__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem;
+}
+
+.detail__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 3rem;
+  align-items: start;
+}
+
+.detail__art {
+  position: relative;
+  aspect-ratio: 1;
+  background: var(--color-surface-alt);
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+}
+
+.detail__cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail__artist {
+  display: block;
+  font-size: var(--text-xs);
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--color-accent-text);
+}
+
+.detail__title {
+  margin: 0.5rem 0 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--color-accent);
+}
+
+.detail__facts {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+}
+
+.detail__fact {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+
+  dt {
+    min-width: 7rem;
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  dd {
+    margin: 0;
+    font-size: var(--text-sm);
+  }
+}
+
+.detail__stock {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.detail__price {
+  margin: var(--space-6) 0 var(--space-4);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-3xl);
+}
+
+.detail__description {
+  margin: 0;
+  max-width: 60ch;
+  line-height: 1.6;
+}
+
+.detail__add {
+  margin-top: var(--space-6);
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.detail__in-cart {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.detail__message-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.detail__not-found-title {
+  margin: 0;
+}
+
+.detail__message {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 768px) {
+  .detail__inner {
+    padding: 2.75rem 1.25rem;
+  }
+
+  .detail__grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}

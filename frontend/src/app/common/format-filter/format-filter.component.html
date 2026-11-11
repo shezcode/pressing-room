@@ -1,0 +1,12 @@
+<div class="format-filter" role="group" [attr.aria-label]="'racks.filterLabel' | translate">
+    @for (filter of formatFilters; track filter.labelKey) {
+    <button
+        type="button"
+        class="btn btn-secondary format-filter__btn"
+        [attr.aria-pressed]="active() === filter.format"
+        (click)="select(filter.format)"
+    >
+        {{ filter.labelKey | translate }}
+    </button>
+    }
+</div>

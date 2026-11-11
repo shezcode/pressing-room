@@ -1,0 +1,251 @@
+<section class="checkout">
+    <div class="checkout__inner">
+        <h1 class="checkout__title">{{ "checkout.title" | translate }}</h1>
+        @if (isEmpty()) {
+        <div class="checkout__message-block">
+            <p class="checkout__message">{{ "checkout.empty" | translate }}</p>
+            <a routerLink="/" class="btn btn-primary">{{ "checkout.backToShop" | translate }}</a>
+        </div>
+        } @else {
+        <div class="checkout__layout">
+            <form class="form checkout__panel" novalidate [formGroup]="form" (ngSubmit)="placeOrder()">
+                <h2 class="checkout__heading">{{ "checkout.shippingTitle" | translate }}</h2>
+                <div class="field">
+                    <label class="field__label" for="checkout-name">{{ "checkout.fullName" | translate }}</label>
+                    <input
+                        type="text"
+                        id="checkout-name"
+                        class="input"
+                        autocomplete="name"
+                        formControlName="name"
+                        [attr.aria-invalid]="form.controls.name.touched && form.controls.name.invalid"
+                        aria-describedby="checkout-name-error"
+                        (input)="clearResult()"
+                    />
+                    <p class="field__error" id="checkout-name-error">
+                        @if (form.controls.name.touched && form.controls.name.invalid) {
+                        {{ "checkout.required" | translate }}
+                        }
+                    </p>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="checkout-street">{{ "checkout.street" | translate }}</label>
+                    <input
+                        type="text"
+                        id="checkout-street"
+                        class="input"
+                        autocomplete="street-address"
+                        formControlName="street"
+                        [attr.aria-invalid]="form.controls.street.touched && form.controls.street.invalid"
+                        aria-describedby="checkout-street-error"
+                        (input)="clearResult()"
+                    />
+                    <p class="field__error" id="checkout-street-error">
+                        @if (form.controls.street.touched && form.controls.street.invalid) {
+                        {{ "checkout.required" | translate }}
+                        }
+                    </p>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="checkout-city">{{ "checkout.city" | translate }}</label>
+                    <input
+                        type="text"
+                        id="checkout-city"
+                        class="input"
+                        autocomplete="address-level2"
+                        formControlName="city"
+                        [attr.aria-invalid]="form.controls.city.touched && form.controls.city.invalid"
+                        aria-describedby="checkout-city-error"
+                        (input)="clearResult()"
+                    />
+                    <p class="field__error" id="checkout-city-error">
+                        @if (form.controls.city.touched && form.controls.city.invalid) {
+                        {{ "checkout.required" | translate }}
+                        }
+                    </p>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="checkout-postal-code">{{ "checkout.postalCode" | translate }}</label>
+                    <input
+                        type="text"
+                        id="checkout-postal-code"
+                        class="input"
+                        autocomplete="postal-code"
+                        formControlName="postalCode"
+                        [attr.aria-invalid]="form.controls.postalCode.touched && form.controls.postalCode.invalid"
+                        aria-describedby="checkout-postal-code-error"
+                        (input)="clearResult()"
+                    />
+                    <p class="field__error" id="checkout-postal-code-error">
+                        @if (form.controls.postalCode.touched && form.controls.postalCode.invalid) {
+                        {{ "checkout.required" | translate }}
+                        }
+                    </p>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="checkout-country">{{ "checkout.country" | translate }}</label>
+                    <select
+                        id="checkout-country"
+                        class="input"
+                        autocomplete="country"
+                        formControlName="isoCode"
+                        [attr.aria-invalid]="form.controls.isoCode.touched && form.controls.isoCode.invalid"
+                        aria-describedby="checkout-country-error"
+                        (change)="clearResult()"
+                    >
+                        <option value="">{{ "checkout.chooseCountry" | translate }}</option>
+                        @for (country of countries(); track country.id) {
+                        <option [value]="country.isoCode">{{ country.name }}</option>
+                        }
+                    </select>
+                    <p class="field__error" id="checkout-country-error">
+                        @if (form.controls.isoCode.touched && form.controls.isoCode.invalid) {
+                        {{ "checkout.required" | translate }}
+                        }
+                    </p>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="checkout-community">{{ "checkout.community" | translate }}</label>
+                    <select
+                        id="checkout-community"
+                        class="input"
+                        formControlName="communityId"
+                        [attr.aria-invalid]="form.controls.communityId.touched && form.controls.communityId.invalid"
+                        aria-describedby="checkout-community-error"
+                        (change)="clearResult()"
+                    >
+                        <option value="">{{ "checkout.chooseCommunity" | translate }}</option>
+                        @for (community of communities(); track community.id) {
+                        <option [value]="community.id">{{ community.name }}</option>
+                        }
+                    </select>
+                    <p class="field__error" id="checkout-community-error">
+                        @if (form.controls.communityId.touched && form.controls.communityId.invalid) {
+                        {{ "checkout.required" | translate }}
+                        }
+                    </p>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="checkout-province">{{ "checkout.province" | translate }}</label>
+                    <select
+                        id="checkout-province"
+                        class="input"
+                        formControlName="provinceId"
+                        [attr.aria-invalid]="form.controls.provinceId.touched && form.controls.provinceId.invalid"
+                        aria-describedby="checkout-province-error"
+                        (change)="clearResult()"
+                    >
+                        <option value="">{{ "checkout.chooseProvince" | translate }}</option>
+                        @for (province of provinces(); track province.id) {
+                        <option [value]="province.id">{{ province.name }}</option>
+                        }
+                    </select>
+                    <p class="field__error" id="checkout-province-error">
+                        @if (form.controls.provinceId.touched && form.controls.provinceId.invalid) {
+                        {{ "checkout.required" | translate }}
+                        }
+                    </p>
+                </div>
+                @if (locationsFailed()) {
+                <p class="form__message" role="alert">
+                    {{ "checkout.locationsError" | translate }}
+                    <button type="button" class="btn btn-secondary" (click)="loadLocations()">
+                        {{ "checkout.retry" | translate }}
+                    </button>
+                </p>
+                }
+                <h2 class="checkout__heading">{{ "checkout.paymentTitle" | translate }}</h2>
+                <p class="checkout__copy">{{ "checkout.paymentCopy" | translate }}</p>
+                <button
+                    class="btn btn-primary form__submit"
+                    type="submit"
+                    [disabled]="
+                        placeState() === 'placing' ||
+                        placeState() === 'placed' ||
+                        summaryStatus() !== 'loaded' ||
+                        blocksCheckout()
+                    "
+                >
+                    {{ (placeState() === "placing" ? "checkout.placing" : "checkout.placeOrder") | translate }}
+                </button>
+                <div class="form__message" role="alert">
+                    @switch (placeState()) { @case ("rejected") {
+                    <p class="checkout__rejection">{{ "checkout.rejected" | translate }}</p>
+                    <ul class="checkout__rejected-lines">
+                        @for (line of rejectedLines(); track line.recordId) {
+                        <li>
+                            @let title = line.title ?? ("checkout.thisRecord" | translate); @if (line.reason === "missing") {
+                            {{ "checkout.rejectedMissing" | translate : { title } }}
+                            } @else if (line.available === 0) {
+                            {{ "checkout.rejectedOutOfStock" | translate : { title } }}
+                            } @else {
+                            {{
+                                "checkout.rejectedStock"
+                                    | translate : { title, available: line.available, quantity: line.quantity }
+                            }}
+                            }
+                        </li>
+                        }
+                    </ul>
+                    <a routerLink="/cart">{{ "checkout.backToCart" | translate }}</a>
+                    } @case ("failed") {
+                    {{ "checkout.error" | translate }}
+                    } }
+                </div>
+            </form>
+            <aside class="checkout__panel" [attr.aria-label]="'checkout.summaryTitle' | translate">
+                <h2 class="checkout__heading">{{ "checkout.summaryTitle" | translate }}</h2>
+                @switch (summaryStatus()) { @case ("loading") {
+                <p class="checkout__message" role="status">{{ "checkout.loading" | translate }}</p>
+                } @case ("error") {
+                <div class="checkout__message-block">
+                    <p class="checkout__message" role="alert">{{ "checkout.summaryError" | translate }}</p>
+                    <button type="button" class="btn btn-secondary" (click)="loadSummary()">
+                        {{ "checkout.retry" | translate }}
+                    </button>
+                </div>
+                } @case ("loaded") { @if (blocksCheckout()) {
+                <p class="checkout__notice" role="alert">
+                    {{ "checkout.blocksCheckout" | translate }}
+                    <a routerLink="/cart">{{ "checkout.backToCart" | translate }}</a>
+                </p>
+                }
+                <ul class="checkout__lines">
+                    @for (row of rows(); track row.recordId) {
+                    <li class="summary-line">
+                        @if (row.record; as record) {
+                        <img
+                            class="summary-line__cover"
+                            [src]="coverSrc(record)"
+                            [alt]="'racks.coverAlt' | translate : { title: record.title }"
+                        />
+                        <div class="summary-line__info">
+                            <span class="summary-line__artist">{{ record.artist }}</span>
+                            <span class="summary-line__title">{{ record.title }}</span>
+                            <span class="summary-line__quantity">{{
+                                "checkout.quantity" | translate : { count: row.quantity }
+                            }}</span>
+                        </div>
+                        <span class="summary-line__subtotal">{{
+                            (record.price * row.quantity) / 100 | currency : "USD" : "symbol" : "1.0-2"
+                        }}</span>
+                        } @else {
+                        <div class="summary-line__cover summary-line__cover--missing" aria-hidden="true"></div>
+                        <div class="summary-line__info">
+                            <span class="summary-line__title">{{ "cart.unavailable" | translate }}</span>
+                        </div>
+                        }
+                    </li>
+                    }
+                </ul>
+                <div class="hr"></div>
+                <p class="checkout__total">
+                    <span class="heading-label">{{ "checkout.total" | translate }}</span>
+                    <strong>{{ total() / 100 | currency : "USD" : "symbol" : "1.0-2" }}</strong>
+                </p>
+                } }
+            </aside>
+        </div>
+        }
+    </div>
+</section>

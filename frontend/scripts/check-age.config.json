@@ -1,0 +1,6 @@
+{
+    "disabled": true,
+    "minimumReleaseAgeInMinutes": 1,
+    "minimumReleaseAgeExclude": [],
+    "createDebugFile": true
+}

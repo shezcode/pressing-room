@@ -1,0 +1,32 @@
+<main class="login">
+    <div class="login__inner">
+        <section class="login__panel" aria-labelledby="sign-in-title">
+            <h1 class="login__title" id="sign-in-title">{{ "login.signIn.title" | translate }}</h1>
+            <p class="login__copy">{{ "login.signIn.copy" | translate }}</p>
+            @if (demo()) {
+            <div class="login__demo">
+                <p class="login__copy">{{ "login.demo.copy" | translate }}</p>
+                <div class="login__demo-actions">
+                    <button class="btn btn-primary" type="button" [disabled]="demoState() === 'submitting'" (click)="tryAs('customer')">
+                        {{ "login.demo.customer" | translate }}
+                    </button>
+                    <button class="btn btn-primary" type="button" [disabled]="demoState() === 'submitting'" (click)="tryAs('admin')">
+                        {{ "login.demo.admin" | translate }}
+                    </button>
+                </div>
+                <p class="form__message" role="alert">
+                    @if (demoState() === "failed") {
+                    {{ "login.demo.error" | translate }}
+                    }
+                </p>
+            </div>
+            }
+            <app-sign-in-form (signedIn)="onSignedIn()" />
+        </section>
+        <section class="login__panel" aria-labelledby="sign-up-title">
+            <h2 class="login__title" id="sign-up-title">{{ "login.signUp.title" | translate }}</h2>
+            <p class="login__copy">{{ "login.signUp.copy" | translate }}</p>
+            <app-sign-up-form (signedIn)="onSignedIn()" />
+        </section>
+    </div>
+</main>

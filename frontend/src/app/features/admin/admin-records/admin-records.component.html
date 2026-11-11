@@ -1,0 +1,132 @@
+<section class="admin">
+    <div class="admin__inner">
+        <h1 class="admin__title">{{ "admin.title" | translate }}</h1>
+        <div class="admin__layout">
+            <div class="admin__list">
+                <h2 class="admin__heading">
+                    {{ "admin.list.title" | translate }}
+                    @if (status() === "loaded") {
+                    <span class="admin__count">({{ total() }})</span>
+                    }
+                </h2>
+                @switch (status()) { @case ("loading") {
+                <p class="admin__message" role="status">{{ "admin.list.loading" | translate }}</p>
+                } @case ("error") {
+                <div class="admin__message-block">
+                    <p class="admin__message" role="alert">{{ "admin.list.error" | translate }}</p>
+                    <button type="button" class="btn btn-secondary" (click)="loadFirstPage()">
+                        {{ "admin.list.retry" | translate }}
+                    </button>
+                </div>
+                } @case ("loaded") { @if (records().length === 0) {
+                <p class="admin__message">{{ "admin.list.empty" | translate }}</p>
+                } @else {
+                <div class="admin__table-wrap">
+                    <table class="records-table">
+                        <caption class="hidden">
+                            {{
+                                "admin.list.caption" | translate
+                            }}
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    <span class="hidden">{{ "admin.list.cover" | translate }}</span>
+                                </th>
+                                <th scope="col">{{ "admin.list.artist" | translate }}</th>
+                                <th scope="col">{{ "admin.list.titleColumn" | translate }}</th>
+                                <th scope="col">{{ "admin.list.format" | translate }}</th>
+                                <th scope="col" class="records-table__number">{{ "admin.list.price" | translate }}</th>
+                                <th scope="col" class="records-table__number">{{ "admin.list.stock" | translate }}</th>
+                                <th scope="col">{{ "admin.list.featured" | translate }}</th>
+                                <th scope="col">
+                                    <span class="hidden">{{ "admin.list.actions" | translate }}</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (record of records(); track record.id) {
+                            <tr>
+                                <td>
+                                    <img
+                                        class="records-table__cover"
+                                        [src]="coverSrc(record)"
+                                        [alt]="'racks.coverAlt' | translate : { title: record.title }"
+                                        width="48"
+                                        height="48"
+                                        loading="lazy"
+                                    />
+                                </td>
+                                <td>{{ record.artist }}</td>
+                                <td>
+                                    <a [routerLink]="['/records', record.id]">{{ record.title }}</a>
+                                </td>
+                                <td>
+                                    {{ record.format }}@if (record.variant) {
+                                    <span class="records-table__variant">{{ record.variant }}</span> }
+                                </td>
+                                <td class="records-table__number">
+                                    {{ record.price / 100 | currency : "USD" : "symbol" : "1.0-2" }}
+                                </td>
+                                <td class="records-table__number">
+                                    {{ record.stock }}
+                                    @if (record.stock === 0) {
+                                    <span class="tag tag-accent">{{ "racks.outOfStock" | translate }}</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (record.featured) {
+                                    <span class="tag tag-outline">{{ "admin.list.featuredYes" | translate }}</span>
+                                    } @else {
+                                    <span class="records-table__no">{{ "admin.list.featuredNo" | translate }}</span>
+                                    }
+                                </td>
+                                <td class="records-table__actions">
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary"
+                                        [attr.aria-label]="'admin.list.editLabel' | translate : { title: record.title }"
+                                        [attr.aria-pressed]="editing()?.id === record.id"
+                                        (click)="edit(record)"
+                                    >
+                                        {{ "admin.list.edit" | translate }}
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary"
+                                        [attr.aria-label]="'admin.list.deleteLabel' | translate : { title: record.title }"
+                                        (click)="confirmDelete(record)"
+                                    >
+                                        {{ "admin.list.delete" | translate }}
+                                    </button>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @if (records().length < total()) {
+                <div class="admin__more">
+                    <button type="button" class="btn btn-secondary" [disabled]="loadingMore()" (click)="loadMore()">
+                        {{ "admin.list.loadMore" | translate }}
+                    </button>
+                    @if (loadMoreFailed()) {
+                    <p class="admin__message" role="alert">{{ "admin.list.error" | translate }}</p>
+                    }
+                </div>
+                } } } }
+            </div>
+            <div class="admin__create">
+                <h2 class="admin__heading">
+                    {{ (editing() ? "admin.form.editHeading" : "admin.form.heading") | translate }}
+                </h2>
+                <p class="admin__success" role="status">
+                    @if (notice(); as result) {
+                    {{ result.key | translate : { title: result.record.title, artist: result.record.artist } }}
+                    }
+                </p>
+                <app-record-form [record]="editing()" (saved)="onSaved($event)" (cancelled)="stopEditing()" />
+            </div>
+        </div>
+    </div>
+</section>

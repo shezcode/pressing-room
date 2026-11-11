@@ -1,0 +1,130 @@
+@use '@angular/material' as mat;
+@use 'styles/theme-colors' as pressing-room;
+@use 'styles/components';
+
+// Pressing Room design system as the Material theme.
+// Light and dark values live side by side via `light-dark()`; `body.dark-theme` flips `color-scheme`.
+$font-family: 'Archivo', system-ui, sans-serif;
+
+html {
+  color-scheme: light;
+  @include mat.theme(
+    (
+      color: (
+        primary: pressing-room.$primary-palette,
+        tertiary: pressing-room.$tertiary-palette
+      ),
+      typography: (
+        plain-family: $font-family,
+        brand-family: $font-family,
+        bold-weight: 800,
+        medium-weight: 600,
+        regular-weight: 400
+      ),
+      density: 0
+    ),
+    (
+      // Exact design colours (light, dark)
+      primary: #c8260d,
+      on-primary: #f8f4f4,
+      background: light-dark(#f3f2f2, #171514),
+      on-background: light-dark(#201e1d, #f1eeee),
+      surface: light-dark(#f3f2f2, #171514),
+      on-surface: light-dark(#201e1d, #f1eeee),
+      on-surface-variant: light-dark(#444141, #c4bfbf),
+      surface-container-lowest: light-dark(#f8f4f4, #0e0d0c),
+      surface-container-low: light-dark(#eae7e7, #201d1c),
+      surface-container: light-dark(#eae9e9, #262322),
+      surface-container-high: light-dark(#eae9e9, #262322),
+      surface-container-highest: light-dark(#d7d3d3, #2f2b2a),
+      outline: light-dark(#858080, #6e6969),
+      outline-variant: light-dark(#aaaaaa, #4a4545),
+      inverse-surface: light-dark(#201e1d, #f1eeee),
+      inverse-on-surface: light-dark(#f3f2f2, #201e1d),
+      inverse-primary: light-dark(#ff9783, #c8260d),
+      // Square corners
+      corner-extra-small: 0,
+      corner-extra-small-top: 0,
+      corner-small: 0,
+      corner-medium: 0,
+      corner-large: 0,
+      corner-large-start: 0,
+      corner-large-end: 0,
+      corner-large-top: 0,
+      corner-extra-large: 0,
+      corner-extra-large-top: 0,
+      corner-full: 0
+    )
+  );
+
+  // Design tokens used by the shared component styles
+  --color-bg: var(--mat-sys-surface);
+  --color-surface: var(--mat-sys-surface-container);
+  --color-surface-alt: var(--mat-sys-surface-container-low);
+  --color-text: var(--mat-sys-on-surface);
+  --color-text-muted: var(--mat-sys-on-surface-variant);
+  --color-divider: var(--mat-sys-outline-variant);
+  --color-input-border: var(--mat-sys-outline);
+  --color-accent: #ec3013;
+  --color-accent-text: light-dark(#c8260d, #ff7b63);
+  --color-accent-fill: var(--mat-sys-primary);
+  --color-accent-fill-hover: #ae1800;
+  --color-on-accent: var(--mat-sys-on-primary);
+  --color-accent-tint: light-dark(#fff2ef, #3d1610);
+  --color-on-accent-tint: light-dark(#71261b, #ffc4b8);
+  --color-highlight: light-dark(#ffc4b8, #7c1405);
+  --color-pressed: #9e3526;
+
+  --color-footer-bg: light-dark(#201e1d, #0e0d0c);
+  --color-footer-text: light-dark(#eae7e7, #d7d3d3);
+  --color-footer-heading: #ffc4b8;
+  --color-footer-strong: #f8f4f4;
+  --color-footer-divider: light-dark(#605d5d, #3d3a39);
+
+  --font-heading: #{$font-family};
+  --font-heading-weight: 800;
+  --font-body: #{$font-family};
+
+  --text-3xs: 0.6875rem;
+  --text-2xs: 0.75rem;
+  --text-xs: 0.8125rem;
+  --text-sm: 0.875rem;
+  --text-base: 0.9375rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.625rem;
+  --text-section-title: clamp(1.625rem, 3.4vw, 2.5rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+
+  --shadow-sm: 0 1px 2px color-mix(in srgb, #2d2b2b 14%, transparent);
+  --shadow-md: 0 3px 10px color-mix(in srgb, #2d2b2b 16%, transparent);
+  --shadow-lg: 0 12px 32px color-mix(in srgb, #2d2b2b 22%, transparent);
+}
+
+body.dark-theme {
+  color-scheme: dark;
+}
+
+html {
+  height: 100%; // Apply the base theme at the root, so it will be inherited by the whole app.
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.55;
+  font-weight: 400;
+  background: var(--color-bg);
+  color: var(--color-text);
+}

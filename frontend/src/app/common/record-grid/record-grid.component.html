@@ -1,0 +1,28 @@
+<div class="record-grid">
+    @for (record of records(); track record.id) {
+    <article class="record-card">
+        <div class="record-card__art">
+            <img
+                class="record-card__cover"
+                [src]="coverSrc(record)"
+                [alt]="'racks.coverAlt' | translate: { title: record.title }"
+                loading="lazy"
+            />
+            @if (record.stock === 0) {
+            <span class="tag tag-accent record-card__stock">{{ "racks.outOfStock" | translate }}</span>
+            }
+        </div>
+        <div class="record-card__body">
+            <span class="record-card__artist">{{ record.artist }}</span>
+            <h3 class="record-card__title">
+                <a class="card-link" [routerLink]="['/records', record.id]">{{ record.title }}</a>
+            </h3>
+            <div class="record-card__meta-row">
+                <span class="record-card__meta">{{ formatLabel(record) }} - {{ record.year }}</span>
+                <span class="record-card__price">{{ record.price / 100 | currency: "USD" : "symbol" : "1.0-2" }}</span>
+            </div>
+            <span class="tag tag-outline record-card__genre">{{ record.genre }}</span>
+        </div>
+    </article>
+    }
+</div>

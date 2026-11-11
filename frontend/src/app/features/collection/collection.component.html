@@ -1,0 +1,57 @@
+<section class="collection">
+    <div class="collection__inner">
+        <h1 class="collection__title">{{ "collection.title" | translate }}</h1>
+        @switch (status()) { @case ("loading") {
+        <p class="collection__message" role="status">{{ "collection.loading" | translate }}</p>
+        } @case ("error") {
+        <div class="collection__message-block">
+            <p class="collection__message" role="alert">{{ "collection.error" | translate }}</p>
+            <button type="button" class="btn btn-secondary" (click)="load()">{{ "collection.retry" | translate }}</button>
+        </div>
+        } @case ("loaded") { @if (entries().length === 0) {
+        <div class="collection__message-block">
+            <p class="collection__message">{{ "collection.empty" | translate }}</p>
+            <a routerLink="/" class="btn btn-primary">{{ "collection.backToShop" | translate }}</a>
+        </div>
+        } @else {
+        <ul class="collection__list">
+            @for (entry of entries(); track entry.recordId) {
+            <li class="collection-entry">
+                @if (entry.inShop) {
+                <a class="collection-entry__art" [routerLink]="['/records', entry.recordId]" tabindex="-1" aria-hidden="true">
+                    <img
+                        class="collection-entry__cover"
+                        [src]="coverSrc(entry)"
+                        [alt]="'racks.coverAlt' | translate : { title: entry.title }"
+                    />
+                </a>
+                } @else {
+                <div class="collection-entry__art">
+                    <img
+                        class="collection-entry__cover"
+                        [src]="coverSrc(entry)"
+                        [alt]="'racks.coverAlt' | translate : { title: entry.title }"
+                    />
+                </div>
+                }
+                <div class="collection-entry__info">
+                    <span class="collection-entry__artist">{{ entry.artist }}</span>
+                    @if (entry.inShop) {
+                    <a class="collection-entry__title" [routerLink]="['/records', entry.recordId]">{{ entry.title }}</a>
+                    } @else {
+                    <span class="collection-entry__title">{{ entry.title }}</span>
+                    }
+                    <span class="collection-entry__format">{{ entry.format }}</span>
+                    @if (!entry.inShop) {
+                    <span class="tag collection-entry__flag">{{ "collection.leftTheShop" | translate }}</span>
+                    }
+                </div>
+                <span class="collection-entry__quantity">{{
+                    "collection.owned" | translate : { count: entry.quantity }
+                }}</span>
+            </li>
+            }
+        </ul>
+        } } }
+    </div>
+</section>

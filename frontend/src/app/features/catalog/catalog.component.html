@@ -1,0 +1,32 @@
+<section class="catalog">
+    <div class="catalog__inner">
+        <div class="catalog__head">
+            <h1 class="catalog__title">
+                @if (search() && total() !== null) {
+                {{ "catalog.results" | translate: { count: total(), term: search() } }}
+                } @else {
+                {{ "catalog.title" | translate }}
+                }
+            </h1>
+            <app-format-filter [active]="activeFormat()" (changed)="filterBy($event)" />
+        </div>
+        <div class="hr"></div>
+        @if (records().length > 0) {
+        <app-record-grid [records]="records()" />
+        } @else if (!loading() && !failed()) {
+        <p class="catalog__message catalog__message--empty" role="status">
+            {{ (isFiltered() ? "racks.noMatches" : "racks.empty") | translate }}
+        </p>
+        }
+        <div class="catalog__footer">
+            @if (loading()) {
+            <p class="catalog__message" role="status">{{ "racks.loading" | translate }}</p>
+            } @else if (failed()) {
+            <p class="catalog__message" role="alert">{{ "racks.error" | translate }}</p>
+            <button type="button" class="btn btn-secondary" (click)="loadMore()">{{ "racks.retry" | translate }}</button>
+            } @else if (hasMore()) {
+            <button type="button" class="btn btn-secondary" (click)="loadMore()">{{ "racks.loadMore" | translate }}</button>
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,350 @@
+{
+    "about": {
+        "title": "Sobre la tienda",
+        "copy": {
+            "start": "Pressing Room empezó con",
+            "crates": "dos cajas",
+            "shop": "de discos detrás de una cafetería en Harrison Street. Hoy clasificamos, limpiamos y enviamos unos",
+            "volume": "cuatrocientos discos a la semana",
+            "link": ", y",
+            "promise": "seguimos probando cada uno antes de que salga."
+        },
+        "story": "Nuestra historia",
+        "stats": {
+            "shelves": {
+                "value": "14.000",
+                "label": "discos en la tienda"
+            },
+            "opened": {
+                "value": "2009",
+                "label": "abrimos en Harrison St"
+            },
+            "delivery": {
+                "value": "1 día",
+                "label": "del pedido a casa"
+            }
+        }
+    },
+    "admin": {
+        "title": "Gestionar discos",
+        "list": {
+            "title": "Todos los discos",
+            "caption": "Todos los discos de la tienda, incluidos los agotados",
+            "loading": "Cargando discos...",
+            "error": "No pudimos cargar los discos.",
+            "retry": "Reintentar",
+            "empty": "Todavía no hay discos. Añade el primero.",
+            "loadMore": "Cargar más",
+            "cover": "Portada",
+            "artist": "Artista",
+            "titleColumn": "Título",
+            "format": "Formato",
+            "price": "Precio",
+            "stock": "Stock",
+            "featured": "Destacado",
+            "featuredYes": "Destacado",
+            "featuredNo": "No",
+            "actions": "Acciones",
+            "edit": "Editar",
+            "delete": "Eliminar",
+            "editLabel": "Editar {{title}}",
+            "deleteLabel": "Eliminar {{title}}"
+        },
+        "form": {
+            "heading": "Añadir un disco",
+            "created": "Se añadió \"{{title}}\" de {{artist}}. Ya está en la tienda.",
+            "artist": "Artista",
+            "title": "Título",
+            "format": "Formato",
+            "variant": "Variante (opcional)",
+            "variantPlaceholder": "LP, 2xLP...",
+            "year": "Año de edición",
+            "genre": "Género",
+            "price": "Precio (USD)",
+            "pricePlaceholder": "24.99",
+            "stock": "Stock",
+            "featured": "Disco destacado",
+            "description": "Descripción",
+            "cover": "Portada",
+            "coverHint": "JPEG, PNG o WebP, hasta 5 MB.",
+            "submit": "Añadir disco",
+            "submitting": "Añadiendo...",
+            "error": "No pudimos añadir el disco. Inténtalo de nuevo.",
+            "errors": {
+                "required": "Este campo es obligatorio.",
+                "tooLong": "Usa {{max}} caracteres o menos.",
+                "year": "Introduce un año entre {{min}} y {{max}}.",
+                "price": "Introduce un precio en dólares, como 24.99.",
+                "stock": "Introduce un número entero, cero o más.",
+                "coverRequired": "Elige una imagen de portada.",
+                "coverType": "La portada debe ser una imagen JPEG, PNG o WebP.",
+                "coverSize": "La portada debe pesar 5 MB o menos.",
+                "rejected": "El servidor lo rechazó: {{message}}"
+            },
+            "editHeading": "Editar un disco",
+            "updated": "Se guardó \"{{title}}\" de {{artist}}. La tienda ya muestra los cambios.",
+            "coverHintEdit": "Déjalo vacío para conservar la portada actual. JPEG, PNG o WebP, hasta 5 MB.",
+            "coverDemoDisabled": "La subida de portadas está desactivada en la demo. Elige una de las portadas de la tienda.",
+            "coverOption": "Portada {{number}}",
+            "save": "Guardar cambios",
+            "saving": "Guardando...",
+            "cancel": "Cancelar",
+            "saveError": "No pudimos guardar los cambios. Inténtalo de nuevo."
+        },
+        "delete": {
+            "title": "¿Eliminar este disco?",
+            "message": "\"{{title}}\" de {{artist}} se quitará de la tienda. Los pedidos ya realizados conservan sus líneas.",
+            "confirm": "Eliminar",
+            "keep": "Mantener",
+            "deleted": "Se eliminó \"{{title}}\" de {{artist}}. Ya no está en la tienda.",
+            "error": "No pudimos eliminar \"{{title}}\". Inténtalo de nuevo."
+        }
+    },
+    "cart": {
+        "title": "Tu carrito",
+        "loading": "Cargando tu carrito...",
+        "error": "No hemos podido cargar tu carrito.",
+        "retry": "Reintentar",
+        "empty": "Tu carrito está vacío.",
+        "backToShop": "Volver a la tienda",
+        "unavailable": "Este disco ya no está disponible",
+        "removeToContinue": "Quítalo para continuar",
+        "blocksCheckout": "Algunos discos de tu carrito no se pueden comprar. Quítalos antes de pagar.",
+        "quantityOf": "Cantidad de {{title}}",
+        "decrease": "Quitar una copia de {{title}}",
+        "increase": "Añadir otra copia de {{title}}",
+        "remove": "Quitar",
+        "removeLabel": "Quitar {{title}} del carrito",
+        "total": "Total",
+        "checkout": "Pagar"
+    },
+    "checkout": {
+        "title": "Finalizar compra",
+        "empty": "Tu carrito está vacío, así que no hay nada que comprar.",
+        "backToShop": "Volver a la tienda",
+        "backToCart": "Volver al carrito",
+        "shippingTitle": "Dirección de envío",
+        "fullName": "Nombre completo",
+        "street": "Dirección",
+        "city": "Ciudad",
+        "postalCode": "Código postal",
+        "country": "País",
+        "community": "Comunidad",
+        "province": "Provincia",
+        "chooseCountry": "Elige un país",
+        "chooseCommunity": "Elige una comunidad",
+        "chooseProvince": "Elige una provincia",
+        "required": "Este campo es obligatorio.",
+        "locationsError": "No hemos podido cargar las listas de ubicaciones.",
+        "retry": "Reintentar",
+        "paymentTitle": "Pago",
+        "paymentCopy": "El pago es simulado: no hace falta tarjeta. Al realizar el pedido se completa.",
+        "placeOrder": "Realizar pedido",
+        "placing": "Realizando pedido...",
+        "rejected": "No hemos podido realizar tu pedido porque el stock ha cambiado. No se ha cobrado nada.",
+        "thisRecord": "Este disco",
+        "rejectedStock": "{{title}}: pediste {{quantity}} pero solo quedan {{available}} en stock. Hemos reducido tu cantidad.",
+        "rejectedOutOfStock": "{{title}} está agotado. Quítalo de tu carrito para continuar.",
+        "rejectedMissing": "{{title}} ya no está disponible. Quítalo de tu carrito para continuar.",
+        "error": "No hemos podido realizar tu pedido. Inténtalo de nuevo.",
+        "summaryTitle": "Resumen",
+        "loading": "Cargando el resumen del pedido...",
+        "summaryError": "No hemos podido cargar el resumen del pedido.",
+        "blocksCheckout": "Algunos discos de tu carrito no se pueden comprar. Quítalos antes de realizar el pedido.",
+        "quantity": "Cantidad: {{count}}",
+        "total": "Total"
+    },
+    "common": {
+        "accessDenied": "Acceso denegado",
+        "close": "Cerrar"
+    },
+    "confirmdialog": {
+        "no": "No",
+        "yes": "Sí"
+    },
+    "demo": {
+        "banner": "Demo de portfolio de una tienda ficticia. No se envía ningún email y los datos se restablecen cada noche, así que no uses una contraseña real."
+    },
+    "errors": {
+        "unknown": "Error desconocido"
+    },
+    "featured": {
+        "title": "Ediciones destacadas",
+        "previous": "Anterior",
+        "next": "Siguiente",
+        "coverAlt": "Portada de {{title}}",
+        "loading": "Cargando ediciones destacadas...",
+        "error": "No hemos podido cargar las ediciones destacadas.",
+        "retry": "Reintentar",
+        "empty": "No hay ediciones destacadas por ahora."
+    },
+    "footer": {
+        "addressStreet": "1717 Harrison St, San Francisco",
+        "addressCity": "CA 94103, EE. UU.",
+        "mainMenu": "Menú",
+        "company": "Empresa",
+        "theCompany": "La empresa",
+        "careers": "Empleo",
+        "press": "Prensa",
+        "discover": "Descubre",
+        "gradingGuide": "Guía de estado",
+        "ourHistory": "Historia",
+        "tradeIns": "Intercambios",
+        "findUsOn": "Síguenos en",
+        "instagram": "Instagram",
+        "discogs": "Discogs",
+        "bandcamp": "Bandcamp",
+        "legal": "Envíos / Devoluciones / Privacidad"
+    },
+    "friday": {
+        "title": "Lista del viernes",
+        "copyStrong": "Un correo por semana:",
+        "copy": "lo que ha llegado, lo que queda",
+        "copyMark": "y los tres discos que nos llevaríamos a casa.",
+        "emailLabel": "Correo electrónico",
+        "subscribe": "Suscribirme",
+        "emailRequired": "Introduce tu correo electrónico.",
+        "emailInvalid": "Introduce un correo válido, como nombre@ejemplo.com.",
+        "subscribed": "Ya estás en la lista. ¡Nos vemos el viernes!",
+        "duplicate": "Ya estás en la lista del viernes.",
+        "error": "No hemos podido suscribirte. Inténtalo de nuevo."
+    },
+    "header": {
+        "logoAlt": "logotipo de Pressing Room",
+        "menu": "Menú",
+        "search": "Buscar",
+        "searchPlaceholder": "Busca artistas, álbumes...",
+        "mainNav": "Principal",
+        "darkTheme": "Tema oscuro",
+        "language": "Idioma",
+        "languages": {
+            "en": "Inglés",
+            "es": "Español"
+        },
+        "cartLabel": "Tu carrito, {{count}} artículos",
+        "signIn": "Iniciar sesión",
+        "admin": "Admin",
+        "signOut": "Cerrar sesión"
+    },
+    "hero": {
+        "arrivals": "Novedades cada viernes",
+        "titleLine1": "Sonido puro",
+        "titleLine2": "compra fácil.",
+        "statNumber": "14.000",
+        "statStrong": "discos en la tienda.",
+        "statCopy": "Revisados a mano, probados antes de salir.",
+        "shopNow": "Comprar",
+        "picks": "Top de la semana",
+        "coverAlt": "Portada de {{title}}"
+    },
+    "login": {
+        "email": "Correo electrónico",
+        "emailRequired": "Introduce tu correo electrónico.",
+        "emailInvalid": "Introduce un correo electrónico válido, como nombre@ejemplo.com.",
+        "password": "Contraseña",
+        "required": "Este campo es obligatorio.",
+        "name": "Nombre",
+        "country": "País",
+        "community": "Comunidad",
+        "province": "Provincia",
+        "chooseCountry": "Elige un país",
+        "chooseCommunity": "Elige una comunidad",
+        "chooseProvince": "Elige una provincia",
+        "locationsError": "No hemos podido cargar las listas de ubicaciones.",
+        "retry": "Reintentar",
+        "demo": {
+            "copy": "¿Visitas la Demo? Sáltate el formulario y explora con una cuenta ya preparada.",
+            "customer": "Probar como Cliente",
+            "admin": "Probar como Admin",
+            "error": "No hemos podido abrir la cuenta de la Demo. Inténtalo de nuevo."
+        },
+        "signIn": {
+            "title": "Iniciar sesión",
+            "copy": "Te damos la bienvenida. Inicia sesión para pagar y ver tu Colección.",
+            "submit": "Iniciar sesión",
+            "invalidCredentials": "Correo o contraseña incorrectos. Inténtalo de nuevo.",
+            "error": "No hemos podido iniciar tu sesión. Inténtalo de nuevo."
+        },
+        "signUp": {
+            "title": "Crear una cuenta",
+            "copy": "¿Primera vez? Regístrate y entrarás en tu cuenta enseguida.",
+            "submit": "Registrarse",
+            "emailTaken": "Ese correo ya está registrado. Prueba a iniciar sesión.",
+            "error": "No hemos podido crear tu cuenta. Inténtalo de nuevo."
+        }
+    },
+    "nav": {
+        "home": "Inicio",
+        "about": "Nosotros",
+        "shop": "Tienda",
+        "collection": "Colección"
+    },
+    "collection": {
+        "title": "Tu colección",
+        "loading": "Cargando tu colección...",
+        "error": "No hemos podido cargar tu colección.",
+        "retry": "Reintentar",
+        "empty": "Todavía no tienes ningún disco. Tu colección se llena a medida que haces pedidos.",
+        "backToShop": "Ver la tienda",
+        "owned": "Tienes: {{count}}",
+        "leftTheShop": "Ya no está en la tienda"
+    },
+    "orderConfirmation": {
+        "title": "Gracias por tu pedido",
+        "loading": "Cargando tu pedido...",
+        "error": "No hemos podido cargar este pedido.",
+        "retry": "Reintentar",
+        "notFoundTitle": "Pedido no encontrado",
+        "notFound": "No hemos encontrado este pedido entre los tuyos.",
+        "backToShop": "Volver a la tienda",
+        "statuses": {
+            "Placed": "Realizado"
+        },
+        "placedOn": "Realizado el {{date}}",
+        "number": "Pedido {{id}}",
+        "linesTitle": "Tus discos",
+        "lineQuantity": "{{count}} × {{price}}",
+        "total": "Total",
+        "addressTitle": "Envío a",
+        "keepShopping": "Seguir comprando"
+    },
+    "recordDetail": {
+        "loading": "Cargando disco...",
+        "error": "No hemos podido cargar este disco.",
+        "retry": "Reintentar",
+        "notFoundTitle": "Disco no encontrado",
+        "notFound": "No hemos encontrado el disco que buscas. Puede que ya no esté en las cajas.",
+        "backToShop": "Volver a la tienda",
+        "format": "Formato",
+        "genre": "Género",
+        "availability": "Disponibilidad",
+        "inStock": "En stock",
+        "addToCart": "Al carrito",
+        "allInCart": "Todas las copias están en tu carrito",
+        "inCart": "{{count}} en tu carrito.",
+        "viewCart": "Ver carrito"
+    },
+    "racks": {
+        "title": "En las cajas",
+        "coverAlt": "Portada de {{title}}",
+        "outOfStock": "Agotado",
+        "loadMore": "Cargar más",
+        "browseCatalog": "Ver el catálogo completo",
+        "loading": "Cargando discos...",
+        "error": "No hemos podido cargar los discos.",
+        "retry": "Reintentar",
+        "empty": "Aún no hay discos en las cajas.",
+        "noMatches": "Ningún disco coincide con tu búsqueda o filtro.",
+        "filterLabel": "Filtrar por formato",
+        "filters": {
+            "all": "Todos",
+            "vinyl": "Vinilo",
+            "cd": "CD",
+            "cassette": "Casete"
+        }
+    },
+    "catalog": {
+        "title": "Catálogo",
+        "results": "{{count}} discos para «{{term}}»"
+    }
+}

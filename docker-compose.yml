@@ -1,0 +1,49 @@
+# Dev servers for the whole product: `docker compose up` starts the API and the Angular app.
+#
+# The source folders are bind-mounted, so edits on the host reload in the containers.
+# node_modules live in named volumes, so the container's Linux installs never mix with
+# the ones on the host. Dependencies are installed with `npm ci` (the lockfile is never
+# rewritten), and only when the lockfile is newer than the installed tree. The images are
+# Node 24 because the committed lockfiles need npm 11 (npm 10 rejects them in `npm ci`).
+#
+# Host ports can be overridden (defaults below):
+#   BACKEND_PORT=3100 FRONTEND_PORT=4300 docker compose up
+# The frontend calls the API at `apiBaseUrl` in frontend/src/environments/ (localhost:3000),
+# so if you move BACKEND_PORT, change that value to match.
+
+services:
+  backend:
+    image: node:24-alpine
+    working_dir: /app
+    command: sh -c "[ node_modules/.package-lock.json -nt package-lock.json ] || npm ci --no-progress; npm run dev"
+    environment:
+      PORT: 3000
+      ALLOWED_ORIGINS: http://localhost:${FRONTEND_PORT:-4200}
+    ports:
+      - "${BACKEND_PORT:-3000}:3000"
+    volumes:
+      - ./backend:/app
+      - backend_node_modules:/app/node_modules
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://localhost:3000/"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+      start_period: 60s
+
+  frontend:
+    image: node:24-alpine
+    working_dir: /app
+    command: sh -c "[ node_modules/.package-lock.json -nt package-lock.json ] || npm ci --no-progress; npm run start_docker"
+    ports:
+      - "${FRONTEND_PORT:-4200}:4200"
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  backend_node_modules:
+  frontend_node_modules:

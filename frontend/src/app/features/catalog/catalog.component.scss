@@ -1,0 +1,61 @@
+// The Catalog page, laid out like the landing racks
+:host {
+  display: block;
+}
+
+.catalog {
+  border-bottom: 2px solid var(--color-divider);
+  background-color: var(--color-surface-alt);
+}
+
+.catalog__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem;
+}
+
+.catalog__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.catalog__title {
+  font-size: var(--text-section-title);
+  margin: 0;
+  letter-spacing: -0.02em;
+  padding-left: 1rem;
+  border-left: 2px solid var(--color-accent);
+}
+
+.catalog .hr {
+  margin-bottom: 0;
+}
+
+.catalog__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+.catalog__message {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.catalog__message--empty {
+  padding: var(--space-8) 0 0;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .catalog__inner {
+    padding: 2.75rem 1.25rem;
+  }
+}

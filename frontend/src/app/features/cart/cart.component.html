@@ -1,0 +1,100 @@
+<section class="cart">
+    <div class="cart__inner">
+        <h1 class="cart__title">{{ "cart.title" | translate }}</h1>
+        @if (isEmpty()) {
+        <div class="cart__message-block">
+            <p class="cart__message">{{ "cart.empty" | translate }}</p>
+            <a routerLink="/" class="btn btn-primary">{{ "cart.backToShop" | translate }}</a>
+        </div>
+        } @else { @switch (status()) { @case ("loading") {
+        <p class="cart__message" role="status">{{ "cart.loading" | translate }}</p>
+        } @case ("error") {
+        <div class="cart__message-block">
+            <p class="cart__message" role="alert">{{ "cart.error" | translate }}</p>
+            <button type="button" class="btn btn-secondary" (click)="load()">{{ "cart.retry" | translate }}</button>
+        </div>
+        } @case ("loaded") { @if (blocksCheckout()) {
+        <p class="cart__notice" role="alert">{{ "cart.blocksCheckout" | translate }}</p>
+        }
+        <ul class="cart__lines">
+            @for (row of rows(); track row.recordId) {
+            <li class="cart-line" [class.cart-line--missing]="!row.record">
+                @if (row.record; as record) {
+                <a class="cart-line__art" [routerLink]="['/records', record.id]" tabindex="-1" aria-hidden="true">
+                    <img
+                        class="cart-line__cover"
+                        [src]="coverSrc(record)"
+                        [alt]="'racks.coverAlt' | translate : { title: record.title }"
+                    />
+                </a>
+                <div class="cart-line__info">
+                    <span class="cart-line__artist">{{ record.artist }}</span>
+                    <a class="cart-line__title" [routerLink]="['/records', record.id]">{{ record.title }}</a>
+                    <span class="cart-line__price">{{ record.price / 100 | currency : "USD" : "symbol" : "1.0-2" }}</span>
+                    @if (record.stock === 0) {
+                    <span class="tag tag-accent cart-line__flag">{{ "racks.outOfStock" | translate }}</span>
+                    }
+                </div>
+                } @else {
+                <div class="cart-line__art cart-line__art--missing" aria-hidden="true"></div>
+                <div class="cart-line__info">
+                    <span class="cart-line__title">{{ "cart.unavailable" | translate }}</span>
+                    <span class="tag tag-accent cart-line__flag">{{ "cart.removeToContinue" | translate }}</span>
+                </div>
+                } @if (row.record; as record) {
+                <div
+                    class="cart-line__quantity"
+                    role="group"
+                    [attr.aria-label]="'cart.quantityOf' | translate : { title: record.title }"
+                >
+                    <button
+                        type="button"
+                        class="btn btn-secondary cart-line__step"
+                        [disabled]="row.quantity <= 1"
+                        [attr.aria-label]="'cart.decrease' | translate : { title: record.title }"
+                        (click)="setQuantity(row, row.quantity - 1)"
+                    >
+                        &minus;
+                    </button>
+                    <output class="cart-line__count">{{ row.quantity }}</output>
+                    <button
+                        type="button"
+                        class="btn btn-secondary cart-line__step"
+                        [disabled]="row.quantity >= record.stock"
+                        [attr.aria-label]="'cart.increase' | translate : { title: record.title }"
+                        (click)="setQuantity(row, row.quantity + 1)"
+                    >
+                        +
+                    </button>
+                </div>
+                <span class="cart-line__subtotal">{{
+                    (record.price * row.quantity) / 100 | currency : "USD" : "symbol" : "1.0-2"
+                }}</span>
+                }
+                <button
+                    type="button"
+                    class="btn btn-secondary cart-line__remove"
+                    [attr.aria-label]="
+                        'cart.removeLabel' | translate : { title: row.record?.title ?? ('cart.unavailable' | translate) }
+                    "
+                    (click)="remove(row)"
+                >
+                    {{ "cart.remove" | translate }}
+                </button>
+            </li>
+            }
+        </ul>
+        <div class="hr"></div>
+        <p class="cart__total">
+            <span class="heading-label">{{ "cart.total" | translate }}</span>
+            <strong>{{ total() / 100 | currency : "USD" : "symbol" : "1.0-2" }}</strong>
+        </p>
+        <div class="cart__actions">
+            <!-- Visitors are sent to sign in by the checkout route's guard and come back afterwards -->
+            <button type="button" class="btn btn-primary" [disabled]="blocksCheckout()" (click)="checkout()">
+                {{ "cart.checkout" | translate }}
+            </button>
+        </div>
+        } } }
+    </div>
+</section>

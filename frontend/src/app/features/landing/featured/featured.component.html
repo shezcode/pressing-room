@@ -1,0 +1,86 @@
+<section class="featured">
+    <div class="featured__inner">
+        <div class="featured__head">
+            <h2 class="featured__title">{{ "featured.title" | translate }}</h2>
+            <div class="featured__nav">
+                <button
+                    type="button"
+                    class="btn btn-secondary icon-btn"
+                    [disabled]="!canPage()"
+                    [attr.aria-label]="'featured.previous' | translate"
+                    (click)="previous()"
+                >
+                    <svg
+                        width="17"
+                        height="17"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="m14 6-6 6 6 6"></path>
+                    </svg>
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-secondary icon-btn"
+                    [disabled]="!canPage()"
+                    [attr.aria-label]="'featured.next' | translate"
+                    (click)="next()"
+                >
+                    <svg
+                        width="17"
+                        height="17"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="m10 6 6 6-6 6"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="hr"></div>
+        @if (visible().length > 0) {
+        <div class="featured__grid" aria-live="polite">
+            @for (record of visible(); track record.id) {
+            <article class="feature-card">
+                <div class="feature-card__art">
+                    <img
+                        class="feature-card__cover"
+                        [src]="coverSrc(record)"
+                        [alt]="'featured.coverAlt' | translate : { title: record.title }"
+                        loading="lazy"
+                    />
+                </div>
+                <div>
+                    <span class="feature-card__artist">{{ record.artist }}</span>
+                    <h3 class="feature-card__title">
+                        <a class="card-link" [routerLink]="['/records', record.id]">{{ record.title }}</a>
+                    </h3>
+                    <div class="feature-card__meta-row">
+                        <span class="tag tag-outline">{{ record.genre }}</span>
+                        <span class="feature-card__meta">{{ formatLabel(record) }} - {{ record.year }}</span>
+                        <span class="feature-card__price">{{ record.price / 100 | currency : "USD" : "symbol" : "1.0-2" }}</span>
+                    </div>
+                </div>
+            </article>
+            }
+        </div>
+        } @else if (loading()) {
+        <p class="featured__message" role="status">{{ "featured.loading" | translate }}</p>
+        } @else if (failed()) {
+        <p class="featured__message" role="alert">{{ "featured.error" | translate }}</p>
+        <button type="button" class="btn btn-secondary" (click)="load()">{{ "featured.retry" | translate }}</button>
+        } @else {
+        <p class="featured__message">{{ "featured.empty" | translate }}</p>
+        }
+    </div>
+</section>

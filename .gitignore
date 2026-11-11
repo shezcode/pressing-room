@@ -1,0 +1,22 @@
+# Dependencies and build output (each project also has its own .gitignore)
+node_modules/
+dist/
+coverage/
+.angular/
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Local agent settings
+.claude/settings.local.json
+
+# Editors and system files
+.idea/
+*.swp
+.DS_Store
+Thumbs.db

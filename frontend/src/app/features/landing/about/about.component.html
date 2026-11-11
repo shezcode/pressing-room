@@ -1,0 +1,21 @@
+<section class="about">
+    <div class="about__inner">
+        <div>
+            <h2 class="about__title">{{ "about.title" | translate }}</h2>
+            <p class="about__copy">
+                {{ "about.copy.start" | translate }} <strong class="text-accent">{{ "about.copy.crates" | translate }}</strong>
+                {{ "about.copy.shop" | translate }} <strong>{{ "about.copy.volume" | translate }}</strong
+                >{{ "about.copy.link" | translate }} <mark>{{ "about.copy.promise" | translate }}</mark>
+            </p>
+            <a class="btn btn-secondary" href="#" (click)="$event.preventDefault()">{{ "about.story" | translate }}</a>
+        </div>
+        <div class="about__stats">
+            @for (stat of stats; track stat) {
+            <div class="about__stat">
+                <span class="about__stat-value">{{ "about.stats." + stat + ".value" | translate }}</span>
+                <span class="about__stat-label">{{ "about.stats." + stat + ".label" | translate }}</span>
+            </div>
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,25 @@
+# Production: runs the image from GHCR behind Nginx Proxy Manager.
+#
+#   cp .env.example .env   # then fill it in
+#   docker compose -f docker-compose.prod.yml pull
+#   docker compose -f docker-compose.prod.yml up -d
+#
+# No host port is published: only containers on the proxy's network reach the app,
+# so in Nginx Proxy Manager forward to host `pressing-room`, port 3000.
+# Data lives inside the container and is re-seeded on every start.
+# IMAGE defaults to the name CI pushes, ghcr.io/<owner>/<repo> lowercased; set it in .env if yours differs.
+# The manual VPS setup is in docs/deploy.md.
+
+services:
+  pressing-room:
+    image: ${IMAGE:-ghcr.io/shezcode/pressing-room:latest}
+    container_name: pressing-room
+    restart: unless-stopped
+    env_file: .env
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
+    name: ${PROXY_NETWORK:?Set PROXY_NETWORK to Nginx Proxy Manager's Docker network}

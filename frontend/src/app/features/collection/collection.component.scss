@@ -1,0 +1,111 @@
+// Collection: one row per owned Record, with the quantity owned on the right
+:host {
+  display: block;
+}
+
+.collection {
+  background-color: var(--color-surface-alt);
+  border-bottom: 2px solid var(--color-divider);
+}
+
+.collection__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem;
+}
+
+.collection__title {
+  margin: 0 0 var(--space-6);
+}
+
+.collection__message-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.collection__message {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.collection__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg);
+  border: 2px solid var(--color-divider);
+}
+
+.collection-entry {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-6);
+  border-top: 2px solid var(--color-divider);
+
+  &:first-child {
+    border-top: 0;
+  }
+}
+
+.collection-entry__art {
+  display: block;
+}
+
+.collection-entry__cover {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: var(--color-surface-alt);
+}
+
+.collection-entry__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.collection-entry__artist {
+  font-size: var(--text-xs);
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--color-accent-text);
+}
+
+.collection-entry__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+.collection-entry__format {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.collection-entry__quantity {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+@media (max-width: 1000px) {
+  .collection__inner {
+    padding: 2rem 1.25rem;
+  }
+
+  .collection-entry {
+    grid-template-columns: 4rem minmax(0, 1fr);
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .collection-entry__quantity {
+    grid-column: 2;
+  }
+}

@@ -1,0 +1,87 @@
+// Create-Record form, built from the design's form tokens
+:host {
+  display: block;
+}
+
+.record-form__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.record-form__description {
+  resize: vertical;
+}
+
+.record-form__file {
+  padding: 0.25rem 0.5rem;
+}
+
+.record-form__covers {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.record-form__cover-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+// The radio sits invisibly over its preview, so the whole thumbnail is the click target
+.record-form__cover-option {
+  position: relative;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  img {
+    display: block;
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+    border: 2px solid transparent;
+    border-radius: 4px;
+  }
+
+  input:checked + img {
+    border-color: var(--color-accent);
+  }
+
+  input:focus-visible + img {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+.record-form__hint {
+  margin: 0;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.record-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.record-form__featured {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  cursor: pointer;
+
+  input {
+    accent-color: var(--color-accent);
+  }
+}

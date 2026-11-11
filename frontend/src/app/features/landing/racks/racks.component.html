@@ -1,0 +1,25 @@
+<section class="racks">
+    <div class="racks__inner">
+        <div class="racks__head">
+            <h2 class="racks__title">{{ "racks.title" | translate }}</h2>
+            <app-format-filter [active]="activeFormat()" (changed)="filterBy($event)" />
+        </div>
+        <div class="hr"></div>
+        @if (records().length > 0) {
+        <app-record-grid [records]="records()" />
+        } @else if (!loading() && !failed()) {
+        <p class="racks__message racks__message--empty" role="status">
+            {{ (activeFormat() ? "racks.noMatches" : "racks.empty") | translate }}
+        </p>
+        }
+        <div class="racks__footer">
+            @if (loading()) {
+            <p class="racks__message" role="status">{{ "racks.loading" | translate }}</p>
+            } @else if (failed()) {
+            <p class="racks__message" role="alert">{{ "racks.error" | translate }}</p>
+            <button type="button" class="btn btn-secondary" (click)="load()">{{ "racks.retry" | translate }}</button>
+            }
+            <a class="btn btn-secondary" routerLink="/records">{{ "racks.browseCatalog" | translate }}</a>
+        </div>
+    </div>
+</section>

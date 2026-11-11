@@ -1,0 +1,27 @@
+<footer class="site-footer">
+    <div class="site-footer__grid">
+        <div>
+            <div class="site-footer__brand-row">
+                <img src="assets/logo.svg" alt="" width="26" height="26" />
+                <span class="site-footer__brand-name">Pressing Room</span>
+            </div>
+            <p class="site-footer__address">
+                {{ "footer.addressStreet" | translate }}<br />{{ "footer.addressCity" | translate }}
+            </p>
+        </div>
+        @for (column of columns; track column.heading) {
+        <nav class="site-footer__col" [attr.aria-label]="column.heading | translate">
+            <h3 class="heading-label">{{ column.heading | translate }}</h3>
+            @for (link of column.links; track link.label) { @if (link.routerLink) {
+            <a [routerLink]="link.routerLink" [fragment]="link.fragment">{{ link.label | translate }}</a>
+            } @else {
+            <a href="#" (click)="$event.preventDefault()">{{ link.label | translate }}</a>
+            } }
+        </nav>
+        }
+    </div>
+    <div class="site-footer__bottom">
+        <span>© {{ year }} Pressing Room</span>
+        <span class="site-footer__legal">{{ "footer.legal" | translate }}</span>
+    </div>
+</footer>

@@ -1,0 +1,162 @@
+// Featured pressings carousel, ported from the original design
+:host {
+  display: block;
+}
+
+.featured {
+  border-bottom: 2px solid var(--color-divider);
+  background-color: var(--color-surface-alt);
+}
+
+.featured__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem;
+}
+
+.featured__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.featured__title {
+  font-size: var(--text-section-title);
+  margin: 0;
+  letter-spacing: -0.02em;
+  padding-left: 1rem;
+  border-left: 2px solid var(--color-accent);
+}
+
+.featured__nav {
+  display: flex;
+  gap: 0.5rem;
+
+  button:hover:not(:disabled) {
+    color: var(--color-accent);
+  }
+
+  button:disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
+}
+
+.featured .hr {
+  margin-bottom: 0;
+}
+
+.featured__message {
+  margin: var(--space-6) 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.featured__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.feature-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 1.375rem;
+  align-items: start;
+
+  &:first-child {
+    padding: 2rem 2rem 0 0;
+    border-right: 2px solid var(--color-divider);
+  }
+
+  &:last-child {
+    padding: 2rem 0 0 2rem;
+  }
+
+  // A single Featured Record has no neighbour to be divided from
+  &:only-child {
+    padding: 2rem 0 0;
+    border-right: 0;
+  }
+}
+
+.feature-card__art {
+  position: relative;
+  aspect-ratio: 1;
+  background: var(--color-surface-alt);
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.feature-card__cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.feature-card:hover .feature-card__cover,
+.feature-card:focus-within .feature-card__cover {
+  transform: scale(1.05);
+}
+
+.feature-card__artist {
+  font-size: var(--text-3xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent-text);
+}
+
+.feature-card__title {
+  margin: 0.25rem 0 0.75rem;
+  font-size: var(--text-2xl);
+  letter-spacing: -0.01em;
+}
+
+.feature-card__meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.feature-card__meta {
+  font-size: var(--text-2xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.feature-card__price {
+  margin-left: auto;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-xl);
+}
+
+@media (max-width: 768px) {
+  .featured__inner {
+    padding: 2.75rem 1.25rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .feature-card:first-child {
+    padding: 2rem 1.25rem 1.5rem;
+    border-right: 0;
+    border-bottom: 2px solid var(--color-divider);
+  }
+
+  .feature-card:last-child {
+    padding: 1.5rem 1.25rem 2rem;
+  }
+
+  .feature-card:only-child {
+    padding: 2rem 1.25rem;
+    border-bottom: 0;
+  }
+}

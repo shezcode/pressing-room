@@ -1,0 +1,256 @@
+<form class="form record-form" novalidate [formGroup]="form" (ngSubmit)="submit()">
+    <div class="field">
+        <label class="field__label" for="record-artist">{{ "admin.form.artist" | translate }}</label>
+        @let artistError = errorFor("artist");
+        <input
+            type="text"
+            id="record-artist"
+            class="input"
+            formControlName="artist"
+            [attr.aria-invalid]="!!artistError"
+            aria-describedby="record-artist-error"
+            (input)="clearResult()"
+        />
+        <p class="field__error" id="record-artist-error">
+            @if (artistError) {
+            {{ artistError.key | translate : artistError.params }}
+            }
+        </p>
+    </div>
+    <div class="field">
+        <label class="field__label" for="record-title">{{ "admin.form.title" | translate }}</label>
+        @let titleError = errorFor("title");
+        <input
+            type="text"
+            id="record-title"
+            class="input"
+            formControlName="title"
+            [attr.aria-invalid]="!!titleError"
+            aria-describedby="record-title-error"
+            (input)="clearResult()"
+        />
+        <p class="field__error" id="record-title-error">
+            @if (titleError) {
+            {{ titleError.key | translate : titleError.params }}
+            }
+        </p>
+    </div>
+    <div class="record-form__row">
+        <div class="field">
+            <label class="field__label" for="record-format">{{ "admin.form.format" | translate }}</label>
+            <select
+                id="record-format"
+                class="input"
+                formControlName="format"
+                [attr.aria-invalid]="!!errorFor('format')"
+                aria-describedby="record-format-error"
+                (change)="clearResult()"
+            >
+                @for (format of formats; track format) {
+                <option [value]="format">{{ format }}</option>
+                }
+            </select>
+            @let formatError = errorFor("format");
+            <p class="field__error" id="record-format-error">
+                @if (formatError) {
+                {{ formatError.key | translate : formatError.params }}
+                }
+            </p>
+        </div>
+        <div class="field">
+            <label class="field__label" for="record-variant">{{ "admin.form.variant" | translate }}</label>
+            @let variantError = errorFor("variant");
+            <input
+                type="text"
+                id="record-variant"
+                class="input"
+                formControlName="variant"
+                [placeholder]="'admin.form.variantPlaceholder' | translate"
+                [attr.aria-invalid]="!!variantError"
+                aria-describedby="record-variant-error"
+                (input)="clearResult()"
+            />
+            <p class="field__error" id="record-variant-error">
+                @if (variantError) {
+                {{ variantError.key | translate : variantError.params }}
+                }
+            </p>
+        </div>
+    </div>
+    <div class="record-form__row">
+        <div class="field">
+            <label class="field__label" for="record-year">{{ "admin.form.year" | translate }}</label>
+            @let yearError = errorFor("year");
+            <input
+                type="text"
+                inputmode="numeric"
+                id="record-year"
+                class="input"
+                formControlName="year"
+                [attr.aria-invalid]="!!yearError"
+                aria-describedby="record-year-error"
+                (input)="clearResult()"
+            />
+            <p class="field__error" id="record-year-error">
+                @if (yearError) {
+                {{ yearError.key | translate : yearError.params }}
+                }
+            </p>
+        </div>
+        <div class="field">
+            <label class="field__label" for="record-genre">{{ "admin.form.genre" | translate }}</label>
+            @let genreError = errorFor("genre");
+            <input
+                type="text"
+                id="record-genre"
+                class="input"
+                formControlName="genre"
+                [attr.aria-invalid]="!!genreError"
+                aria-describedby="record-genre-error"
+                (input)="clearResult()"
+            />
+            <p class="field__error" id="record-genre-error">
+                @if (genreError) {
+                {{ genreError.key | translate : genreError.params }}
+                }
+            </p>
+        </div>
+    </div>
+    <div class="record-form__row">
+        <div class="field">
+            <label class="field__label" for="record-price">{{ "admin.form.price" | translate }}</label>
+            @let priceError = errorFor("price");
+            <input
+                type="text"
+                inputmode="decimal"
+                id="record-price"
+                class="input"
+                formControlName="price"
+                [placeholder]="'admin.form.pricePlaceholder' | translate"
+                [attr.aria-invalid]="!!priceError"
+                aria-describedby="record-price-error"
+                (input)="clearResult()"
+            />
+            <p class="field__error" id="record-price-error">
+                @if (priceError) {
+                {{ priceError.key | translate : priceError.params }}
+                }
+            </p>
+        </div>
+        <div class="field">
+            <label class="field__label" for="record-stock">{{ "admin.form.stock" | translate }}</label>
+            @let stockError = errorFor("stock");
+            <input
+                type="text"
+                inputmode="numeric"
+                id="record-stock"
+                class="input"
+                formControlName="stock"
+                [attr.aria-invalid]="!!stockError"
+                aria-describedby="record-stock-error"
+                (input)="clearResult()"
+            />
+            <p class="field__error" id="record-stock-error">
+                @if (stockError) {
+                {{ stockError.key | translate : stockError.params }}
+                }
+            </p>
+        </div>
+    </div>
+    <div class="field">
+        <label class="field__label" for="record-description">{{ "admin.form.description" | translate }}</label>
+        @let descriptionError = errorFor("description");
+        <textarea
+            id="record-description"
+            class="input record-form__description"
+            rows="3"
+            formControlName="description"
+            [attr.aria-invalid]="!!descriptionError"
+            aria-describedby="record-description-error"
+            (input)="clearResult()"
+        ></textarea>
+        <p class="field__error" id="record-description-error">
+            @if (descriptionError) {
+            {{ descriptionError.key | translate : descriptionError.params }}
+            }
+        </p>
+    </div>
+    <div class="field">
+        @let error = coverError(); @if (demo()) {
+        <fieldset
+            class="record-form__covers"
+            [attr.aria-invalid]="!!error"
+            aria-describedby="record-cover-hint record-cover-error"
+        >
+            <legend class="field__label">{{ "admin.form.cover" | translate }}</legend>
+            <div class="record-form__cover-grid">
+                @for (coverUrl of existingCovers(); track coverUrl; let i = $index) {
+                <label class="record-form__cover-option">
+                    <input
+                        type="radio"
+                        name="record-cover-pick"
+                        [value]="coverUrl"
+                        [checked]="pickedCover() === coverUrl"
+                        (change)="pickCover(coverUrl)"
+                    />
+                    <img
+                        [src]="coverSrc(coverUrl)"
+                        [alt]="'admin.form.coverOption' | translate : { number: i + 1 }"
+                        width="64"
+                        height="64"
+                        loading="lazy"
+                    />
+                </label>
+                }
+            </div>
+        </fieldset>
+        } @else {
+        <label class="field__label" for="record-cover">{{ "admin.form.cover" | translate }}</label>
+        <input
+            #coverInput
+            type="file"
+            id="record-cover"
+            class="input record-form__file"
+            accept="image/jpeg,image/png,image/webp"
+            [attr.aria-invalid]="!!error"
+            aria-describedby="record-cover-hint record-cover-error"
+            (change)="onCoverChange($event)"
+        />
+        }
+        <p class="record-form__hint" id="record-cover-hint">
+            @if (demo()) {
+            {{ "admin.form.coverDemoDisabled" | translate }}
+            } @else {
+            {{ (record() ? "admin.form.coverHintEdit" : "admin.form.coverHint") | translate }}
+            }
+        </p>
+        <p class="field__error" id="record-cover-error">
+            @if (error) {
+            {{ error.key | translate : error.params }}
+            }
+        </p>
+    </div>
+    <label class="record-form__featured">
+        <input type="checkbox" formControlName="featured" (change)="clearResult()" />
+        {{ "admin.form.featured" | translate }}
+    </label>
+    <div class="record-form__actions">
+        <button type="submit" class="btn btn-primary form__submit" [disabled]="state() === 'submitting'">
+            @if (record()) {
+            {{ (state() === "submitting" ? "admin.form.saving" : "admin.form.save") | translate }}
+            } @else {
+            {{ (state() === "submitting" ? "admin.form.submitting" : "admin.form.submit") | translate }}
+            }
+        </button>
+        @if (record()) {
+        <button type="button" class="btn btn-secondary" (click)="cancelled.emit()">
+            {{ "admin.form.cancel" | translate }}
+        </button>
+        }
+    </div>
+    <p class="form__message" role="alert">
+        @if (state() === "failed") {
+        {{ (record() ? "admin.form.saveError" : "admin.form.error") | translate }}
+        }
+    </p>
+</form>

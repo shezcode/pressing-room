@@ -1,0 +1,139 @@
+<form class="form" novalidate [formGroup]="form" (ngSubmit)="submit()">
+    <div class="field">
+        <label class="field__label" for="sign-up-name">{{ "login.name" | translate }}</label>
+        <input
+            type="text"
+            id="sign-up-name"
+            class="input"
+            autocomplete="name"
+            formControlName="name"
+            [attr.aria-invalid]="form.controls.name.touched && form.controls.name.invalid"
+            aria-describedby="sign-up-name-error"
+            (input)="clearResult()"
+        />
+        <p class="field__error" id="sign-up-name-error">
+            @if (form.controls.name.touched && form.controls.name.invalid) {
+            {{ "login.required" | translate }}
+            }
+        </p>
+    </div>
+    <div class="field">
+        <label class="field__label" for="sign-up-email">{{ "login.email" | translate }}</label>
+        <input
+            type="email"
+            id="sign-up-email"
+            class="input"
+            autocomplete="email"
+            formControlName="email"
+            [attr.aria-invalid]="form.controls.email.touched && form.controls.email.invalid"
+            aria-describedby="sign-up-email-error"
+            (input)="clearResult()"
+        />
+        <p class="field__error" id="sign-up-email-error">
+            @if (form.controls.email.touched && form.controls.email.invalid) {
+            {{ (form.controls.email.hasError("required") ? "login.emailRequired" : "login.emailInvalid") | translate }}
+            }
+        </p>
+    </div>
+    <div class="field">
+        <label class="field__label" for="sign-up-password">{{ "login.password" | translate }}</label>
+        <input
+            type="password"
+            id="sign-up-password"
+            class="input"
+            autocomplete="new-password"
+            formControlName="password"
+            [attr.aria-invalid]="form.controls.password.touched && form.controls.password.invalid"
+            aria-describedby="sign-up-password-error"
+            (input)="clearResult()"
+        />
+        <p class="field__error" id="sign-up-password-error">
+            @if (form.controls.password.touched && form.controls.password.invalid) {
+            {{ "login.required" | translate }}
+            }
+        </p>
+    </div>
+    <div class="field">
+        <label class="field__label" for="sign-up-country">{{ "login.country" | translate }}</label>
+        <select
+            id="sign-up-country"
+            class="input"
+            autocomplete="country"
+            formControlName="countryId"
+            [attr.aria-invalid]="form.controls.countryId.touched && form.controls.countryId.invalid"
+            aria-describedby="sign-up-country-error"
+            (change)="clearResult()"
+        >
+            <option value="">{{ "login.chooseCountry" | translate }}</option>
+            @for (country of countries(); track country.id) {
+            <option [value]="country.id">{{ country.name }}</option>
+            }
+        </select>
+        <p class="field__error" id="sign-up-country-error">
+            @if (form.controls.countryId.touched && form.controls.countryId.invalid) {
+            {{ "login.required" | translate }}
+            }
+        </p>
+    </div>
+    <div class="field">
+        <label class="field__label" for="sign-up-community">{{ "login.community" | translate }}</label>
+        <select
+            id="sign-up-community"
+            class="input"
+            formControlName="communityId"
+            [attr.aria-invalid]="form.controls.communityId.touched && form.controls.communityId.invalid"
+            aria-describedby="sign-up-community-error"
+            (change)="clearResult()"
+        >
+            <option value="">{{ "login.chooseCommunity" | translate }}</option>
+            @for (community of communities(); track community.id) {
+            <option [value]="community.id">{{ community.name }}</option>
+            }
+        </select>
+        <p class="field__error" id="sign-up-community-error">
+            @if (form.controls.communityId.touched && form.controls.communityId.invalid) {
+            {{ "login.required" | translate }}
+            }
+        </p>
+    </div>
+    <div class="field">
+        <label class="field__label" for="sign-up-province">{{ "login.province" | translate }}</label>
+        <select
+            id="sign-up-province"
+            class="input"
+            formControlName="provinceId"
+            [attr.aria-invalid]="form.controls.provinceId.touched && form.controls.provinceId.invalid"
+            aria-describedby="sign-up-province-error"
+            (change)="clearResult()"
+        >
+            <option value="">{{ "login.chooseProvince" | translate }}</option>
+            @for (province of provinces(); track province.id) {
+            <option [value]="province.id">{{ province.name }}</option>
+            }
+        </select>
+        <p class="field__error" id="sign-up-province-error">
+            @if (form.controls.provinceId.touched && form.controls.provinceId.invalid) {
+            {{ "login.required" | translate }}
+            }
+        </p>
+    </div>
+    @if (locationsFailed()) {
+    <p class="form__message" role="alert">
+        {{ "login.locationsError" | translate }}
+        <button type="button" class="btn btn-secondary" (click)="loadLocations()">{{ "login.retry" | translate }}</button>
+    </p>
+    }
+    <button class="btn btn-primary form__submit" type="submit" [disabled]="state() === 'submitting'">
+        {{ "login.signUp.submit" | translate }}
+    </button>
+    <p class="form__message" role="alert">
+        @switch (state()) {
+        @case ("emailTaken") {
+        {{ "login.signUp.emailTaken" | translate }}
+        }
+        @case ("failed") {
+        {{ "login.signUp.error" | translate }}
+        }
+        }
+    </p>
+</form>

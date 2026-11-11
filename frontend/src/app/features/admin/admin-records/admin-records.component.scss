@@ -1,0 +1,139 @@
+// Admin Records page, built from the design's tokens
+:host {
+  display: block;
+}
+
+.admin {
+  background-color: var(--color-surface-alt);
+  border-bottom: 2px solid var(--color-divider);
+}
+
+.admin__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem;
+}
+
+.admin__title {
+  margin: 0 0 var(--space-6);
+}
+
+.admin__layout {
+  display: grid;
+  gap: var(--space-6);
+  align-items: start;
+
+  @media (min-width: 64rem) {
+    grid-template-columns: minmax(0, 1fr) 24rem;
+  }
+}
+
+.admin__list,
+.admin__create {
+  min-width: 0;
+}
+
+.admin__heading {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-xl);
+}
+
+.admin__count {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.admin__message-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.admin__message {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+// Reserves a line so the confirmation does not shift the form
+.admin__success {
+  margin: 0 0 var(--space-2);
+  min-height: 1.25em;
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.admin__table-wrap {
+  overflow-x: auto;
+}
+
+.admin__more {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.records-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+
+  th,
+  td {
+    padding: var(--space-2) var(--space-3);
+    text-align: left;
+    vertical-align: middle;
+    border-top: 2px solid var(--color-divider);
+  }
+
+  th {
+    border-top: 0;
+    border-bottom: 2px solid var(--color-divider);
+    font-size: var(--text-2xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  tbody tr:first-child td {
+    border-top: 0;
+  }
+}
+
+.records-table__number {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.records-table__actions {
+  white-space: nowrap;
+
+  .btn + .btn {
+    margin-left: var(--space-1);
+  }
+
+  // Marks the row being edited
+  .btn[aria-pressed='true'] {
+    background: var(--color-pressed);
+    color: var(--color-on-accent);
+  }
+}
+
+.records-table__cover {
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+}
+
+.records-table__variant {
+  margin-left: var(--space-1);
+  color: var(--color-text-muted);
+}
+
+.records-table__no {
+  color: var(--color-text-muted);
+}
