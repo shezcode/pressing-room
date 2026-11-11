@@ -1,6 +1,6 @@
 # Every push and pull request: lint, unit tests and the production build, plus the Playwright suite
-# against the production image in demo mode. On main, when both pass: push the image to GHCR and
-# deploy it to the VPS. The manual setup this needs is in docs/deploy.md.
+# against the production image in demo mode. On main, when both pass: push the image to GHCR.
+# CI cannot reach the VPS (SSH is tailnet-only), so deploying is scripts/deploy.sh, run by hand; see docs/deploy.md.
 name: CI
 
 on:
@@ -67,8 +67,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    outputs:
-      image: ${{ steps.name.outputs.image }}
     steps:
       - uses: actions/checkout@v4
       # GHCR names must be lowercase; github.repository keeps the owner's casing
@@ -87,36 +85,3 @@ jobs:
           docker push "$IMAGE:$GITHUB_SHA"
           docker push "$IMAGE:latest"
 
-  deploy:
-    name: Deploy to the VPS
-    needs: publish
-    runs-on: ubuntu-latest
-    concurrency:
-      group: deploy
-      cancel-in-progress: false
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up SSH
-        env:
-          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
-          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
-        run: |
-          install -m 700 -d ~/.ssh
-          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
-      # Copies the compose file so the VPS always runs the committed one, then pulls this commit's
-      # image and recreates the container. IMAGE in the shell overrides the one in the VPS's .env.
-      - name: Pull and restart
-        env:
-          IMAGE: ${{ needs.publish.outputs.image }}:${{ github.sha }}
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
-          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
-        run: |
-          target="$DEPLOY_USER@$DEPLOY_HOST"
-          ssh_opts=(-i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes)
-          scp "${ssh_opts[@]}" docker-compose.prod.yml "$target:$DEPLOY_PATH/docker-compose.prod.yml"
-          # shellcheck disable=SC2029 # the path and image are meant to expand here, not on the VPS
-          ssh "${ssh_opts[@]}" "$target" \
-            "cd '$DEPLOY_PATH' && export IMAGE='$IMAGE' && docker compose -f docker-compose.prod.yml pull && docker compose -f docker-compose.prod.yml up -d --remove-orphans"

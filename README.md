@@ -5,7 +5,7 @@
 
 **Live demo: [pressingroom.shezcode.com](https://pressingroom.shezcode.com)**: no sign-up needed. Click "Try as Customer" or "Try as Admin" on the login page.
 
-Pressing Room is a record shop built with **Angular 20** (zoneless, signals, standalone components) and a small Node/Express API. Visitors browse and search the Catalog, filter it by Format and fill a Cart. Customers check out and keep a Collection of what they bought. The Admin manages the Catalog, including cover uploads. It ships as one Docker image, is tested end to end with Playwright on every push, and deploys itself when `main` goes green. The shop is fictional and the demo resets its data every night.
+Pressing Room is a record shop built with **Angular 20** (zoneless, signals, standalone components) and a small Node/Express API. Visitors browse and search the Catalog, filter it by Format and fill a Cart. Customers check out and keep a Collection of what they bought. The Admin manages the Catalog, including cover uploads. It ships as one Docker image, is tested end to end with Playwright on every push, and deploys with one script once `main` is green. The shop is fictional and the demo resets its data every night.
 
 ![Browsing the Catalog, opening a Record and adding it to the Cart](docs/readme/journey.gif)
 
@@ -182,7 +182,7 @@ The Admin gets an **Admin** link in the header to manage Records (create, edit, 
 
 ## Deployment and CI
 
-GitHub Actions (`.github/workflows/ci.yml`) runs lint, unit tests, the production build and the Playwright suite on every push and pull request. When both pass on `main`, it pushes the image to GHCR and deploys it.
+GitHub Actions (`.github/workflows/ci.yml`) runs lint, unit tests, the production build and the Playwright suite on every push and pull request. When both pass on `main`, it pushes the image to GHCR. Deploying is one command, `scripts/deploy.sh`, run from a machine on the VPS's tailnet.
 
 On the server, `docker-compose.prod.yml` runs the image from GHCR on Nginx Proxy Manager's network without publishing a port. Copy `.env.example` to `.env` and fill it in; it lists every setting. The one-time VPS setup is in [`docs/deploy.md`](docs/deploy.md).
 
